@@ -1,0 +1,561 @@
+<script>
+    var CISBodies = {"77":{"ID":"77","~ID":"77","IBLOCK_ID":"8","~IBLOCK_ID":"8","NAME":"\u0412\u043d\u0435\u0434\u043e\u0440\u043e\u0436\u043d\u0438\u043a","~NAME":"\u0412\u043d\u0435\u0434\u043e\u0440\u043e\u0436\u043d\u0438\u043a","DETAIL_PAGE_URL":"\/settings\/detail.php?ID=77","~DETAIL_PAGE_URL":"\/settings\/detail.php?ID=77","PREVIEW_PICTURE":null,"~PREVIEW_PICTURE":null,"DETAIL_PICTURE":null,"~DETAIL_PICTURE":null,"SORT":"60","~SORT":"60","LANG_DIR":"\/","~LANG_DIR":"\/","CODE":"suv","~CODE":"suv","EXTERNAL_ID":"77","~EXTERNAL_ID":"77","IBLOCK_SECTION_ID":null,"~IBLOCK_SECTION_ID":null,"IBLOCK_TYPE_ID":"settings","~IBLOCK_TYPE_ID":"settings","IBLOCK_CODE":"bodies","~IBLOCK_CODE":"bodies","IBLOCK_EXTERNAL_ID":null,"~IBLOCK_EXTERNAL_ID":null,"LID":"s1","~LID":"s1"},"76":{"ID":"76","~ID":"76","IBLOCK_ID":"8","~IBLOCK_ID":"8","NAME":"\u041a\u0440\u043e\u0441\u0441\u043e\u0432\u0435\u0440","~NAME":"\u041a\u0440\u043e\u0441\u0441\u043e\u0432\u0435\u0440","DETAIL_PAGE_URL":"\/settings\/detail.php?ID=76","~DETAIL_PAGE_URL":"\/settings\/detail.php?ID=76","PREVIEW_PICTURE":null,"~PREVIEW_PICTURE":null,"DETAIL_PICTURE":null,"~DETAIL_PICTURE":null,"SORT":"50","~SORT":"50","LANG_DIR":"\/","~LANG_DIR":"\/","CODE":"crossover","~CODE":"crossover","EXTERNAL_ID":"76","~EXTERNAL_ID":"76","IBLOCK_SECTION_ID":null,"~IBLOCK_SECTION_ID":null,"IBLOCK_TYPE_ID":"settings","~IBLOCK_TYPE_ID":"settings","IBLOCK_CODE":"bodies","~IBLOCK_CODE":"bodies","IBLOCK_EXTERNAL_ID":null,"~IBLOCK_EXTERNAL_ID":null,"LID":"s1","~LID":"s1"},"72":{"ID":"72","~ID":"72","IBLOCK_ID":"8","~IBLOCK_ID":"8","NAME":"\u0421\u0435\u0434\u0430\u043d","~NAME":"\u0421\u0435\u0434\u0430\u043d","DETAIL_PAGE_URL":"\/settings\/detail.php?ID=72","~DETAIL_PAGE_URL":"\/settings\/detail.php?ID=72","PREVIEW_PICTURE":null,"~PREVIEW_PICTURE":null,"DETAIL_PICTURE":null,"~DETAIL_PICTURE":null,"SORT":"10","~SORT":"10","LANG_DIR":"\/","~LANG_DIR":"\/","CODE":"sedan","~CODE":"sedan","EXTERNAL_ID":"72","~EXTERNAL_ID":"72","IBLOCK_SECTION_ID":null,"~IBLOCK_SECTION_ID":null,"IBLOCK_TYPE_ID":"settings","~IBLOCK_TYPE_ID":"settings","IBLOCK_CODE":"bodies","~IBLOCK_CODE":"bodies","IBLOCK_EXTERNAL_ID":null,"~IBLOCK_EXTERNAL_ID":null,"LID":"s1","~LID":"s1"},"75":{"ID":"75","~ID":"75","IBLOCK_ID":"8","~IBLOCK_ID":"8","NAME":"\u0425\u044d\u0442\u0447\u0431\u0435\u043a","~NAME":"\u0425\u044d\u0442\u0447\u0431\u0435\u043a","DETAIL_PAGE_URL":"\/settings\/detail.php?ID=75","~DETAIL_PAGE_URL":"\/settings\/detail.php?ID=75","PREVIEW_PICTURE":null,"~PREVIEW_PICTURE":null,"DETAIL_PICTURE":null,"~DETAIL_PICTURE":null,"SORT":"40","~SORT":"40","LANG_DIR":"\/","~LANG_DIR":"\/","CODE":"hatchback","~CODE":"hatchback","EXTERNAL_ID":"75","~EXTERNAL_ID":"75","IBLOCK_SECTION_ID":null,"~IBLOCK_SECTION_ID":null,"IBLOCK_TYPE_ID":"settings","~IBLOCK_TYPE_ID":"settings","IBLOCK_CODE":"bodies","~IBLOCK_CODE":"bodies","IBLOCK_EXTERNAL_ID":null,"~IBLOCK_EXTERNAL_ID":null,"LID":"s1","~LID":"s1"},"78":{"ID":"78","~ID":"78","IBLOCK_ID":"8","~IBLOCK_ID":"8","NAME":"\u0424\u0443\u0440\u0433\u043e\u043d","~NAME":"\u0424\u0443\u0440\u0433\u043e\u043d","DETAIL_PAGE_URL":"\/settings\/detail.php?ID=78","~DETAIL_PAGE_URL":"\/settings\/detail.php?ID=78","PREVIEW_PICTURE":null,"~PREVIEW_PICTURE":null,"DETAIL_PICTURE":null,"~DETAIL_PICTURE":null,"SORT":"70","~SORT":"70","LANG_DIR":"\/","~LANG_DIR":"\/","CODE":"van","~CODE":"van","EXTERNAL_ID":"78","~EXTERNAL_ID":"78","IBLOCK_SECTION_ID":null,"~IBLOCK_SECTION_ID":null,"IBLOCK_TYPE_ID":"settings","~IBLOCK_TYPE_ID":"settings","IBLOCK_CODE":"bodies","~IBLOCK_CODE":"bodies","IBLOCK_EXTERNAL_ID":null,"~IBLOCK_EXTERNAL_ID":null,"LID":"s1","~LID":"s1"}}
+    
+    var CISData = {"filter":{"brands":[{"id":"2079","name":"Chevrolet Auto","vehicles":16,"alias":"chevrolet_auto"},{"id":"5","name":"Citroen","vehicles":5,"alias":"citroen"},{"id":"56","name":"Hyundai","vehicles":346,"alias":"hyundai"},{"id":"62","name":"Jaguar","vehicles":6,"alias":"jaguar"},{"id":"8","name":"Kia","vehicles":100,"alias":"kia"},{"id":"125","name":"LADA","vehicles":251,"alias":"lada"},{"id":"68","name":"Land Rover","vehicles":17,"alias":"land_rover"},{"id":"1","name":"Opel","vehicles":5,"alias":"opel"},{"id":"4","name":"Peugeot","vehicles":14,"alias":"peugeot"}],"models":[{"id":"25","name":"2008","brand_id":"4"},{"id":"27","name":"3008","brand_id":"4"},{"id":"1956","name":"4x4","brand_id":"125"},{"id":"49","name":"Berlingo","brand_id":"5"},{"id":"43","name":"C4","brand_id":"5"},{"id":"9430","name":"C5 AirCross","brand_id":"5"},{"id":"2359","name":"Carnival","brand_id":"8"},{"id":"75","name":"Ceed","brand_id":"8"},{"id":"76","name":"Cerato","brand_id":"8"},{"id":"18741","name":"Cobalt","brand_id":"2079"},{"id":"122","name":"Combo","brand_id":"1"},{"id":"6761","name":"Creta","brand_id":"56"},{"id":"10456","name":"Crossland","brand_id":"1"},{"id":"2191","name":"Discovery Sport","brand_id":"68"},{"id":"8640","name":"E-Pace","brand_id":"62"},{"id":"1098","name":"Elantra","brand_id":"56"},{"id":"37","name":"Expert","brand_id":"4"},{"id":"2380","name":"F-Pace","brand_id":"62"},{"id":"1952","name":"Granta","brand_id":"125"},{"id":"6326","name":"K5","brand_id":"8"},{"id":"1954","name":"Largus","brand_id":"125"},{"id":"19190","name":"Nexia 3","brand_id":"2079"},{"id":"19187","name":"Palisade","brand_id":"56"},{"id":"240","name":"Partner","brand_id":"4"},{"id":"74","name":"Picanto","brand_id":"8"},{"id":"1240","name":"Range Rover Sport","brand_id":"68"},{"id":"73","name":"Rio","brand_id":"8"},{"id":"1120","name":"Santa Fe","brand_id":"56"},{"id":"18121","name":"Seltos","brand_id":"8"},{"id":"1123","name":"Solaris","brand_id":"56"},{"id":"1124","name":"Sonata","brand_id":"56"},{"id":"82","name":"Sorento","brand_id":"8"},{"id":"80","name":"Soul","brand_id":"8"},{"id":"8853","name":"SpaceTourer","brand_id":"5"},{"id":"81","name":"Sportage","brand_id":"8"},{"id":"21401","name":"Staria","brand_id":"56"},{"id":"8133","name":"Traveller","brand_id":"4"},{"id":"2419","name":"Tucson","brand_id":"56"},{"id":"2369","name":"Vesta","brand_id":"125"},{"id":"143","name":"Vivaro","brand_id":"1"},{"id":"2512","name":"XRAY","brand_id":"125"}],"productionYears":[2022,2021,2020,2019],"minPrice":"586000.0000","maxPrice":"28500000.0000","programs":[{"id":"6","name":"Honda approved"},{"id":"1","name":"Subaru select"}],"regions":[],"totalCountItems":{"byPrograms":{"":812}}},"items":[{"id":689360,"vin":"XTA219170L0356645","internal_status":null,"job":"I21917R2900022419","model_id":1048,"model_name":"\u041d\u043e\u0432\u0430\u044f Granta \u043b\u0438\u0444\u0442\u0431\u044d\u043a","ref_model_id":1952,"ref_model_name":"Granta","brand_id":125,"brand_name":"LADA","modification":226825,"modification_name":"1.6 AMT (106 \u043b. \u0441.)","complectation_name":"Classic Optima","equipment":10318,"equipment_name":null,"color":3262,"color_name":"\u0411\u0435\u043b\u043e\u0435 \u043e\u0431\u043b\u0430\u043a\u043e (240)","price":586000,"special_price":586000,"min_price":586000,"status":{"id":1,"name":"\u0412 \u043d\u0430\u043b\u0438\u0447\u0438\u0438"},"image":"https:\/\/195004.selcdn.ru\/ref\/catalog\/11218\/7_%D0%91%D0%B5%D0%BB%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_240.png","image_preview":"https:\/\/195004.selcdn.ru\/ref\/catalog\/11218\/7_%D0%91%D0%B5%D0%BB%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_240.png","images":[{"full":"https:\/\/195004.selcdn.ru\/ref\/catalog\/11218\/7_%D0%91%D0%B5%D0%BB%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_240.png","preview_large":"https:\/\/195004.selcdn.ru\/ref\/catalog\/11218\/7_%D0%91%D0%B5%D0%BB%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_240.png","preview_small":"https:\/\/195004.selcdn.ru\/ref\/catalog\/11218\/7_%D0%91%D0%B5%D0%BB%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE_240.png"}],"stock_type":false,"credit_lowest":0,"mileage":null,"manufacture_year":2019,"place":{"name":null,"code":null,"address":null,"phone":null,"email":null},"dealership":{"id":1227,"name":"LADA \u042f\u0431\u043b\u043e\u043d\u043e\u0432\u0441\u043a\u0438\u0439","phone":"+7 (861) 2128800","email":"","address":"385100, \u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u0410\u0434\u044b\u0433\u0435\u044f,\u0410\u0443\u043b \u0422\u0430\u0445\u0442\u0430\u043c\u0443\u043a\u0430\u0439, \u0443\u043b\u0438\u0446\u0430 \u041a\u0440\u0430\u0441\u043d\u043e\u0434\u0430\u0440\u0441\u043a\u0430\u044f,1","site":"[\"https:\/\/yug-avto.lada.ru\"]"},"general":[{"name":"\u0414\u0432\u0438\u0433\u0430\u0442\u0435\u043b\u044c","value":"1,6 (106 \u043b.\u0441.) \/ \u0411\u0435\u043d\u0437\u0438\u043d\u043e\u0432\u044b\u0439"},{"name":"\u0422\u0440\u0430\u043d\u0441\u043c\u0438\u0441\u0441\u0438\u044f","value":"\u0420\u043e\u0431\u043e\u0442"},{"name":"\u0426\u0432\u0435\u0442","value":"\u0411\u0435\u043b\u043e\u0435 \u043e\u0431\u043b\u0430\u043a\u043e (240)"},{"name":"\u041e\u0431\u0438\u0432\u043a\u0430","value":""},{"name":"\u0413\u043e\u0434 \u0432\u044b\u043f\u0443\u0441\u043a\u0430","value":2019}],"region":null,"programs":null,"body_type":null,"vehicle_planned_shipment_date":null,"link":null,"_links":{"self":{"href":"https:\/\/autos.autocrm.ru\/api\/v1\/vehicles\/689360"}}}],"_links":{"self":{"href":"https:\/\/autos.autocrm.ru\/api\/v1\/vehicles\/all?page=1&per-page=1"},"first":{"href":"https:\/\/autos.autocrm.ru\/api\/v1\/vehicles\/all?page=1&per-page=1"},"last":{"href":"https:\/\/autos.autocrm.ru\/api\/v1\/vehicles\/all?page=812&per-page=1"},"next":{"href":"https:\/\/autos.autocrm.ru\/api\/v1\/vehicles\/all?page=2&per-page=1"}},"_meta":{"totalCount":812,"pageCount":812,"currentPage":1,"perPage":1}}
+</script>
+
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://bootswatch.com/5/yeti/bootstrap.min.css" type="text/css"  rel="stylesheet" />
+    <title>CIS</title>
+    <style>
+        /* Colors */
+:root {
+	--yalightgray: #f3f5f6;
+	--yagray: #bdc0c2;
+	--yamiddlegray: #7b8284;
+	--yadarkgray: #565b5d;
+	--yablackgray: #1c232c;
+	
+	--yablack: #000000;
+	--yawhite: #ffffff;
+	
+	--yalightblue: #87cefa;
+	--yablue: #0048a9;
+	--yadarkblue: #003375;
+	
+	--yalightyellow: #ffe687;
+	--yayellow: #fdba4d;
+	--yadarkyellow: #fdaa25;
+
+	--swiper-theme-color: #0048a9;
+}
+
+.mobile {
+	display: none;
+}
+@media (max-width: 991px) {
+	.mobile {
+		display: block;
+	}
+	.desktop {
+		display: none;
+	}
+}
+
+body {
+	font-family: 'PT Sans', sans-serif;
+	overflow: auto;
+}
+h1, h2, h3 {
+	font-weight: 700;
+}
+
+a, a:visited {
+	color: var(--yablue);
+	transition: .2s;
+}
+a:hover, a:active, a:focus {
+	color: var(--yadarkblue);
+	transition: .2s;
+}
+
+.белый {color: var(--yawhite);transition: .2s;}
+
+.c-yalightgray {color: var(--yalightgray) !important;transition: .2s;}
+.c-yagray {color: var(--yagray) !important;transition: .2s;}
+.c-yamiddlegray {color: var(--yamiddlegray) !important;transition: .2s;}
+.c-yadarkgray {color: var(--yadarkgray) !important;transition: .2s;}
+.c-yablackgray {color: var(--yablackgray) !important;transition: .2s;}
+.c-yablack {color: var(--yablack) !important;transition: .2s;}
+.c-yawhite {color: var(--yawhite) !important;transition: .2s;}
+.c-yalightblue {color: var(--yalightblue) !important;transition: .2s;}
+.c-yablue {color: var(--yablue) !important;transition: .2s;}
+.c-yadarkblue {color: var(--yadarkblue) !important;transition: .2s;}
+.c-yalightyellow {color: var(--yalightyellow) !important;transition: .2s;}
+.c-yayellow {color: var(--yayellow) !important;transition: .2s;}
+.c-yadarkyellow {color: var(--yadarkyellow) !important;transition: .2s;}
+
+.c-h-yalightgray:hover {color: var(--yalightgray) !important;transition: .2s;}
+.c-h-yagray:hover {color: var(--yagray) !important;transition: .2s;}
+.c-h-yamiddlegray:hover {color: var(--yamiddlegray) !important;transition: .2s;}
+.c-h-yadarkgray:hover {color: var(--yadarkgray) !important;transition: .2s;}
+.c-h-yablackgray:hover {color: var(--yablackgray) !important;transition: .2s;}
+.c-h-yablack:hover {color: var(--yablack) !important;transition: .2s;}
+.c-h-yawhite:hover {color: var(--yawhite) !important;transition: .2s;}
+.c-h-yalightblue:hover {color: var(--yalightblue) !important;transition: .2s;}
+.c-h-yablue:hover {color: var(--yablue) !important;transition: .2s;}
+.c-h-yadarkblue:hover {color: var(--yadarkblue) !important;transition: .2s;}
+.c-h-yalightyellow:hover {color: var(--yalightyellow) !important;transition: .2s;}
+.c-h-yayellow:hover {color: var(--yayellow) !important;transition: .2s;}
+.c-h-yadarkyellow:hover {color: var(--yadarkyellow) !important;transition: .2s;}
+
+.bg-yalightgray {background-color: var(--yalightgray);transition: .2s;}
+.bg-yagray {background-color: var(--yagray);transition: .2s;}
+.bg-yamiddlegray {background-color: var(--yamiddlegray);transition: .2s;}
+.bg-yadarkgray {background-color: var(--yadarkgray);transition: .2s;}
+.bg-yablackgray {background-color: var(--yablackgray);transition: .2s;}
+.bg-yablack {background-color: var(--yablack);transition: .2s;}
+.bg-yawhite {background-color: var(--yawhite);transition: .2s;}
+.bg-yalightblue {background-color: var(--yalightblue);transition: .2s;}
+.bg-yablue {background-color: var(--yablue);transition: .2s;}
+.bg-yadarkblue {background-color: var(--yadarkblue);transition: .2s;}
+.bg-yalightyellow {background-color: var(--yalightyellow);transition: .2s;}
+.bg-yayellow {background-color: var(--yayellow);transition: .2s;}
+.bg-yadarkyellow {background-color: var(--yadarkyellow);transition: .2s;}
+
+.bg-h-yalightgray:hover {background-color: var(--yalightgray);transition: .2s;}
+.bg-h-yagray:hover {background-color: var(--yagray);transition: .2s;}
+.bg-h-yamiddlegray:hover {background-color: var(--yamiddlegray);transition: .2s;}
+.bg-h-yadarkgray:hover {background-color: var(--yadarkgray);transition: .2s;}
+.bg-h-yablackgray:hover {background-color: var(--yablackgray);transition: .2s;}
+.bg-h-yablack:hover {background-color: var(--yablack);transition: .2s;}
+.bg-h-yawhite:hover {background-color: var(--yawhite);transition: .2s;}
+.bg-h-yalightblue:hover {background-color: var(--yalightblue);transition: .2s;}
+.bg-h-yablue:hover {background-color: var(--yablue);transition: .2s;}
+.bg-h-yadarkblue:hover {background-color: var(--yadarkblue);transition: .2s;}
+.bg-h-yalightyellow:hover {background-color: var(--yalightyellow);transition: .2s;}
+.bg-h-yayellow:hover {background-color: var(--yayellow);transition: .2s;}
+.bg-h-yadarkyellow:hover {background-color: var(--yadarkyellow);transition: .2s;}
+
+.b-yalightgray {border: var(--yalightgray) 1px solid;transition: .2s;}
+.b-yagray {border: var(--yagray) 1px solid;transition: .2s;}
+.b-yamiddlegray {border: var(--yamiddlegray) 1px solid;transition: .2s;}
+.b-yadarkgray {border: var(--yadarkgray) 1px solid;transition: .2s;}
+.b-yablackgray {border: var(--yablackgray) 1px solid;transition: .2s;}
+.b-yablack {border: var(--yablack) 1px solid;transition: .2s;}
+.b-yawhite {border: var(--yawhite) 1px solid;transition: .2s;}
+.b-yalightblue {border: var(--yalightblue) 1px solid;transition: .2s;}
+.b-yablue {border: var(--yablue) 1px solid;transition: .2s;}
+.b-yadarkblue {border: var(--yadarkblue) 1px solid;transition: .2s;}
+.b-yalightyellow {border: var(--yalightyellow) 1px solid;transition: .2s;}
+.b-yayellow {border: var(--yayellow) 1px solid;transition: .2s;}
+.b-yadarkyellow {border: var(--yadarkyellow) 1px solid;transition: .2s;}
+
+.b-h-yalightgray:hover {outline: var(--yalightgray) 1px solid;transition: .2s;}
+.b-h-yagray:hover {outline: var(--yagray) 1px solid;}
+.b-h-yamiddlegray:hover {outline: var(--yamiddlegray) 1px solid;transition: .2s;}
+.b-h-yadarkgray:hover {outline: var(--yadarkgray) 1px solid;transition: .2s;}
+.b-h-yablackgray:hover {outline: var(--yablackgray) 1px solid;transition: .2s;}
+.b-h-yablack:hover {outline: var(--yablack) 1px solid;transition: .2s;}
+.b-h-yawhite:hover {outline: var(--yawhite) 1px solid;transition: .2s;}
+.b-h-yalightblue:hover {outline: var(--yalightblue) 1px solid;transition: .2s;}
+.b-h-yablue:hover {outline: var(--yablue) 1px solid;transition: .2s;}
+.b-h-yadarkblue:hover {outline: var(--yadarkblue) 1px solid;transition: .2s;}
+.b-h-yalightyellow:hover {outline: var(--yalightyellow) 1px solid;transition: .2s;}
+.b-h-yayellow:hover {outline: var(--yayellow) 1px solid;transition: .2s;}
+.b-h-yadarkyellow:hover {outline: var(--yadarkyellow) 1px solid;transition: .2s;}
+
+.b-radius-small {border-radius: 5px;}
+.b-radius {border-radius: 10px;}
+
+.text-minus {font-size: .9rem;}
+.text-minus-minus {font-size: .8rem;}
+.text-minus-minus-minus {font-size: .7rem;}
+
+.text-plus {font-size: 1.2rem;}
+.text-plus-plus {font-size: 1.4rem;}
+.text-plus-plus-plus {font-size: 1.6rem;}
+
+.letter-spacing-plus{letter-spacing:.1rem;}
+
+.shadow-small {
+	-webkit-box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	-moz-box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	transition: .2s;
+}
+.shadow-small-h:hover {
+	-webkit-box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	-moz-box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	box-shadow: 2px 4px 8px 0px rgba(189, 192, 194, 0.5);
+	transition: .2s;
+}
+.shadow {
+	-webkit-box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	-moz-box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	transition: .2s;
+}
+.shadow-h:hover {
+	-webkit-box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	-moz-box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	box-shadow: 4px 8px 8px 0px rgba(189, 192, 194, 0.5);
+	transition: .2s;
+}
+
+a.a-svg-hide svg {
+	transition: .2s;
+	display: none;
+}
+a.a-h-svg-visible:hover svg {
+	transition: .2s;
+	display: inline;
+}
+
+.but-lg {
+	padding: 12px;
+}
+.but {
+	padding: 8px;
+}
+.but-sm {
+	padding: 6px;
+}
+
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0.25em;
+	margin-right: 10px;
+}
+.form-check-input:checked {
+    background-color: var(--yablue);
+    border-color: var(--yablue);
+}
+.form-check label {
+	width: 90%;
+}
+.main-row__info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.career__item-city {
+	margin-bottom: 0;
+}
+.services {
+	cursor: pointer;
+	text-decoration: none;
+	display: block;
+}
+.services-img {
+	margin-bottom: 10px;
+}
+.services__link {
+	font-size: 14px;
+	position: relative;
+	padding-right: 25px;
+}
+.services__link:after {
+	content: '';
+	display: inline-block;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	-webkit-transform: translateY(-.1em);
+	transform: translateY(-.1em);
+	width: 18px;
+	height: 16px;
+	background-image: url(/upload/img/service-lux__arrow.svg);
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	margin-left: 5px;
+}
+
+.remodal {
+	border-radius: 5px;
+}
+.remodal-overlay {
+    background: rgba(0, 0, 0, .4);
+}
+
+.remodal-close,
+.remodal-close:before {
+    top: 0;
+    left: unset;
+    right: 0;
+}
+@media only screen and (min-width: 641px) {
+  .remodal {
+	  max-width: 600px;
+  }
+  .remodal.videoreview-modal {
+	  max-width: 630px;
+  }
+}
+
+@media only screen and (min-width: 998px) {
+	.remodal.videoreview-modal {
+		max-width: 930px;
+	}
+}
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" width="0" height="0" display="none" aria-hidden="true">
+    
+      <symbol id="arrow-down" viewbox="0 0 74 74">
+          <title>arrow-down</title>
+          <path d="M36.5,60.4C36.5,60.4,36.5,60.4,36.5,60.4c0.2,0,0.2,0.1,0.3,0.1c0.1,0,0.2,0,0.3,0c0,0,0,0,0,0c0,0,0,0,0,0s0,0,0,0
+              c0.1,0,0.2,0,0.3,0c0.1,0,0.1,0,0.2-0.1c0,0,0.1,0,0.1,0c0.1,0,0.1-0.1,0.2-0.1c0,0,0,0,0.1,0c0.1-0.1,0.1-0.1,0.2-0.2c0,0,0,0,0,0
+              l22-22c0.6-0.6,0.6-1.5,0-2.1c-0.6-0.6-1.5-0.6-2.1,0L38.5,55.4V15c0-0.8-0.7-1.5-1.5-1.5s-1.5,0.7-1.5,1.5v40.4L16.1,35.9
+              c-0.6-0.6-1.5-0.6-2.1,0c-0.3,0.3-0.4,0.7-0.4,1.1c0,0.4,0.1,0.8,0.4,1.1l22,22c0.1,0.1,0.1,0.1,0.2,0.2c0,0,0,0,0.1,0
+              C36.3,60.3,36.4,60.4,36.5,60.4z"/>
+      </symbol>
+      <symbol id="arrow-up" viewbox="0 0 74 74">
+          <title>arrow-up</title>
+          <path d="M37.6,13.6C37.6,13.6,37.5,13.6,37.6,13.6c-0.2,0-0.2-0.1-0.3-0.1c-0.1,0-0.2,0-0.3,0c0,0,0,0,0,0c0,0,0,0,0,0s0,0,0,0
+              c-0.1,0-0.2,0-0.3,0c-0.1,0-0.1,0-0.2,0.1c0,0-0.1,0-0.1,0c-0.1,0-0.1,0.1-0.2,0.1c0,0,0,0-0.1,0c-0.1,0.1-0.1,0.1-0.2,0.2
+              c0,0,0,0,0,0L14,36c-0.6,0.6-0.6,1.5,0,2.1c0.6,0.6,1.5,0.6,2.1,0l19.4-19.5l0,40.4c0,0.8,0.7,1.5,1.5,1.5s1.5-0.7,1.5-1.5l0-40.4
+              L58,38.1c0.6,0.6,1.5,0.6,2.1,0c0.3-0.3,0.4-0.7,0.4-1.1c0-0.4-0.1-0.8-0.4-1.1l-22-22c-0.1-0.1-0.1-0.1-0.2-0.2c0,0,0,0-0.1,0
+              C37.7,13.7,37.7,13.7,37.6,13.6z"/>
+      </symbol>
+      <symbol id="arrow-left" viewbox="0 0 74 74">
+          <title>arrow-left</title>
+          <path d="M13.6,36.5C13.6,36.5,13.6,36.5,13.6,36.5c0,0.2-0.1,0.2-0.1,0.3c0,0.1,0,0.2,0,0.3c0,0,0,0,0,0c0,0,0,0,0,0s0,0,0,0
+              c0,0.1,0,0.2,0,0.3c0,0.1,0,0.1,0.1,0.2c0,0,0,0.1,0,0.1c0,0.1,0.1,0.1,0.1,0.2c0,0,0,0,0,0.1c0.1,0.1,0.1,0.1,0.2,0.2c0,0,0,0,0,0
+              l22,22c0.6,0.6,1.5,0.6,2.1,0c0.6-0.6,0.6-1.5,0-2.1L18.7,38.5H59c0.8,0,1.5-0.7,1.5-1.5s-0.7-1.5-1.5-1.5H18.7l19.5-19.4
+              c0.6-0.6,0.6-1.5,0-2.1c-0.3-0.3-0.7-0.4-1.1-0.4c-0.4,0-0.8,0.1-1.1,0.4L14,36c-0.1,0.1-0.1,0.1-0.2,0.2c0,0,0,0,0,0.1
+              C13.7,36.3,13.7,36.4,13.6,36.5z"/>
+      </symbol>
+      <symbol id="arrow-right" viewbox="0 0 74 74">
+          <title>arrow-right</title>
+          <path d="M60.4,37.6C60.4,37.5,60.4,37.5,60.4,37.6c0-0.2,0.1-0.2,0.1-0.3c0-0.1,0-0.2,0-0.3c0,0,0,0,0,0c0,0,0,0,0,0s0,0,0,0
+              c0-0.1,0-0.2,0-0.3c0-0.1,0-0.1-0.1-0.2c0,0,0-0.1,0-0.1c0-0.1-0.1-0.1-0.1-0.2c0,0,0,0,0-0.1c-0.1-0.1-0.1-0.1-0.2-0.2c0,0,0,0,0,0
+              l-22-22c-0.6-0.6-1.5-0.6-2.1,0c-0.6,0.6-0.6,1.5,0,2.1l19.5,19.4H15c-0.8,0-1.5,0.7-1.5,1.5s0.7,1.5,1.5,1.5h40.4L35.9,57.9
+              c-0.6,0.6-0.6,1.5,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4c0.4,0,0.8-0.1,1.1-0.4l22-22c0.1-0.1,0.1-0.1,0.2-0.2c0,0,0,0,0-0.1
+              C60.3,37.7,60.4,37.6,60.4,37.6z"/>
+      </symbol>
+  
+      <symbol id="corner-down" viewbox="0 0 74 74">
+          <title>corner-down</title>
+          <path d="M18.9,28.7c0-0.4,0.1-0.8,0.4-1.1c0.6-0.6,1.5-0.6,2.1,0L37,43.1l15.5-15.5c0.6-0.6,1.5-0.6,2.1,0c0.6,0.6,0.6,1.5,0,2.1
+              L38.1,46.3c-0.6,0.6-1.5,0.6-2.1,0L19.4,29.8C19.1,29.5,18.9,29.1,18.9,28.7z"/>
+      </symbol>
+      <symbol id="corner-up" viewbox="0 0 74 74">
+          <title>corner-up</title>
+          <path d="M55.1,45.3c0,0.4-0.1,0.8-0.4,1.1c-0.6,0.6-1.5,0.6-2.1,0L37,30.9L21.5,46.3c-0.6,0.6-1.5,0.6-2.1,0
+              c-0.6-0.6-0.6-1.5,0-2.1l16.6-16.5c0.6-0.6,1.5-0.6,2.1,0l16.6,16.5C54.9,44.5,55.1,44.9,55.1,45.3z"/>
+      </symbol>
+      <symbol id="corner-right" viewbox="0 0 74 74">
+          <title>corner-right</title>
+          <path d="M28.7,55.1c-0.4,0-0.8-0.1-1.1-0.4c-0.6-0.6-0.6-1.5,0-2.1L43.1,37L27.7,21.5c-0.6-0.6-0.6-1.5,0-2.1
+              c0.6-0.6,1.5-0.6,2.1,0l16.5,16.6c0.6,0.6,0.6,1.5,0,2.1L29.8,54.6C29.5,54.9,29.1,55.1,28.7,55.1z"/>
+      </symbol>
+  
+      <symbol id="cross" viewbox="0 0 74 74">
+          <title>cross</title>
+          <path d="M60.1,58L38.9,36.8l20.7-20.7c0.6-0.6,0.6-1.5,0-2.1c-0.6-0.6-1.5-0.6-2.1,0L36.8,34.7L16.1,14c-0.6-0.6-1.5-0.6-2.1,0
+              c-0.6,0.6-0.6,1.5,0,2.1l20.7,20.7L13.8,57.7c-0.6,0.6-0.6,1.5,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4s0.8-0.1,1.1-0.4l20.9-20.9L58,60.1
+              c0.3,0.3,0.7,0.4,1.1,0.4s0.8-0.1,1.1-0.4C60.7,59.5,60.7,58.5,60.1,58z"/>
+      </symbol>
+      <symbol id="corner-left" viewbox="0 0 74 74">
+          <title>corner-left</title>
+          <path d="M45.3,18.9c0.4,0,0.8,0.1,1.1,0.4c0.6,0.6,0.6,1.5,0,2.1L30.9,37l15.5,15.5c0.6,0.6,0.6,1.5,0,2.1c-0.6,0.6-1.5,0.6-2.1,0
+              L27.7,38.1c-0.6-0.6-0.6-1.5,0-2.1l16.5-16.6C44.5,19.1,44.9,18.9,45.3,18.9z"/>
+      </symbol>
+  
+      <symbol id="burger-mini" viewbox="0 0 74 74">
+          <title>burger-mini</title>
+          <path d="M67.5,50.5h-61c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5h61c1.4,0,2.5,1.1,2.5,2.5S68.9,50.5,67.5,50.5z"/>
+          <path d="M67.5,28.5h-61c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5h61c1.4,0,2.5,1.1,2.5,2.5S68.9,28.5,67.5,28.5z"/>
+      </symbol>
+      <symbol id="burger" viewbox="0 0 74 74">
+          <title>burger</title>
+          <path d="M17.6,39.5h-11C5.2,39.5,4,38.4,4,37s1.1-2.5,2.5-2.5h11c1.4,0,2.5,1.1,2.5,2.5S18.9,39.5,17.6,39.5z"/>
+          <path d="M67.5,39.5H28.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5h39.1c1.4,0,2.5,1.1,2.5,2.5S68.9,39.5,67.5,39.5z"/>
+          <path d="M17.6,23h-11C5.2,23,4,21.9,4,20.5S5.2,18,6.5,18h11c1.4,0,2.5,1.1,2.5,2.5S18.9,23,17.6,23z"/>
+          <path d="M67.5,23H28.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5h39.1c1.4,0,2.5,1.1,2.5,2.5S68.9,23,67.5,23z"/>
+          <path d="M17.6,56h-11C5.2,56,4,54.9,4,53.5S5.2,51,6.5,51h11c1.4,0,2.5,1.1,2.5,2.5S18.9,56,17.6,56z"/>
+          <path d="M67.5,56H28.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5h39.1c1.4,0,2.5,1.1,2.5,2.5S68.9,56,67.5,56z"/>
+      </symbol>
+  
+      <symbol id="phone" viewbox="0 0 74 74">
+          <title>phone</title>
+          <path fill-rule="evenodd" d="M28.2,44.7c-4.6-4.7-8.7-9.3-12.7-15.6c-5.7-9-6.9-12,1.9-18.1l11.7,12.2l-7.5,7.3
+              c0.2,2.5,16.5,19.1,22,22.5l7.6-7.2c2.8,2.6,6.9,6.4,10.7,10.4c-6.8,8.3-7.8,8.5-18.2,1.3C37.5,53.3,32.8,49.3,28.2,44.7L28.2,44.7z
+              M55.4,39c-4.5-4.4-7.8-0.1-12.6,4.4c-5.1-5.4-7.7-6.9-12.1-12.3c4.3-3.9,9.7-7.1,2.5-14.8C29.7,12.5,23.2,4.2,19,4.1
+              c-3.9-0.9-32,8.3,0.6,41.4c8.5,8.7,14.9,16,26.9,21.9c8.8,4.3,12.5,3,17.9-2.3c4.8-4.1,6.9-9,4.9-11.8C65.8,48.7,60.6,44.4,55.4,39z"/>
+      </symbol>
+  
+      <symbol id="favorites" viewbox="0 0 74 74">
+          <title>favorites</title>
+          <path d="M14.9,70c-1.2,0-2.3-0.3-3.3-0.9c-1.2-0.8-2.1-1.9-2.7-3.2c-0.6-1.3-0.9-2.7-0.7-4.1V17.7c0-3.6,1.5-7.1,4.1-9.7
+              c2.6-2.6,6.1-4,9.7-4.1h30.2c3.6,0,7.1,1.4,9.7,4c2.6,2.6,4,6.1,4,9.7v44.1c0.1,1.4-0.1,2.8-0.7,4.1c-0.6,1.3-1.5,2.4-2.7,3.2
+              c-1.3,0.6-2.7,0.9-4.1,0.9c-1.4-0.1-2.8-0.5-4-1.3l-15.3-8.5c-0.7-0.3-1.4-0.4-2.1-0.4c-0.7,0-1.4,0.2-2.1,0.4l-15.3,8.5
+              C18.2,69.5,16.5,70,14.9,70z M37,56.3c1.3,0,2.6,0.3,3.8,0.9l15.3,8.5c0.7,0.5,1.4,0.8,2.3,0.9c0.8,0.1,1.6,0,2.4-0.4
+              c0.6-0.5,1.1-1.2,1.4-1.9c0.3-0.8,0.4-1.6,0.3-2.4V17.7c0-2.7-1.1-5.4-3-7.3c-1.9-1.9-4.6-3-7.3-3H21.9c-2.7,0-5.4,1.1-7.3,3
+              c-1.9,1.9-3,4.6-3,7.3v44.1c-0.1,0.8,0,1.6,0.3,2.4c0.3,0.8,0.8,1.4,1.4,1.9c0.8,0.3,1.6,0.4,2.4,0.4c0.8-0.1,1.6-0.4,2.2-0.9
+              l15.3-8.5C34.4,56.6,35.7,56.2,37,56.3L37,56.3z"/>
+          <path d="M37.5,31.9c-5,0-9-1.5-9.2-1.6c-0.9-0.4-1.3-1.4-1-2.3c0.4-0.9,1.4-1.3,2.3-1l0,0c0.1,0,7.9,3,14.9,0c0.9-0.4,1.9,0,2.3,0.9
+              c0.4,0.9,0,1.9-0.9,2.3C43,31.5,40.1,31.9,37.5,31.9z"/>
+      </symbol>
+  
+      <symbol id="map" viewbox="0 0 74 74">
+          <title>map</title>
+          <path fill-rule="evenodd" d="M53.3,53.3c-1.3-1.4-3.4-3.7-5.5-6.4c3.7-5.8,6.5-11.7,6.5-16.4c0-3.7-0.8-7.3-2.3-10.4
+              c0.4,0,0.8-0.1,1.3-0.1c7.1,0,12.9,5.8,12.9,12.9C66.2,38.3,57.9,48.4,53.3,53.3z M29.2,64.2c-7-7.4-21.4-24.5-21.4-33.7
+              C7.9,18.6,17.4,9,29.3,9C41,9,50.6,18.6,50.6,30.4C50.6,39.7,36.3,56.8,29.2,64.2z M53.3,16.1c-1.1,0-2.1,0.1-3.2,0.3
+              C45.6,9.7,37.9,5.3,29.2,5.3C15.4,5.3,4.1,16.5,4.1,30.4c0,13.5,22.9,36.8,23.8,37.8c0.4,0.4,0.8,0.6,1.3,0.6s1-0.2,1.3-0.6
+              c0.6-0.6,8.5-8.7,15-18c3.3,4,6.2,7,6.4,7.2c0.4,0.4,0.8,0.6,1.3,0.6c0.5,0,1-0.2,1.3-0.6C56.2,55.7,70,41.5,70,32.8
+              C70,23.6,62.5,16.1,53.3,16.1z"/>
+          <path fill-rule="evenodd" d="M29.3,37.6c-4.1,0-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5c4.1,0,7.4,3.4,7.4,7.5S33.3,37.6,29.3,37.6z
+              M29.3,18.8c-6.2,0-11.2,5-11.2,11.2s5,11.2,11.2,11.2c6.2,0,11.2-5,11.2-11.2S35.4,18.8,29.3,18.8z"/>
+      </symbol>
+      <symbol id="map-marker" viewbox="0 0 74 74">
+          <title>map-marker</title>
+          <path d="M37.1,69.8c-4.6,0-9-1.8-12.2-5C15.9,56.1,6,42.2,9.7,25.7C13.1,10.8,25.8,4.2,37,4.2c11.2,0,24,6.7,27.4,21.6
+              c3.7,16.5-6.2,30.3-15.2,39.1C46,68,41.6,69.8,37.1,69.8z M13,26.5c-3.4,14.9,5.8,27.8,14.2,35.9c2.7,2.6,6.2,4.1,9.9,4.1
+              c3.7,0,7.2-1.5,9.9-4.1c8.3-8.1,17.5-20.9,14.2-35.9C58,12.5,46.2,7.6,37.1,7.5C27.9,7.5,16.2,12.5,13,26.5L13,26.5z"/>
+          <path d="M36.9,48.4c-3,0-5.8-1.2-7.9-3.3c-2.1-2.1-3.3-5-3.3-8.1c0-3,1.2-5.9,3.3-8.1c2.1-2.1,5-3.3,7.9-3.3c3,0,5.8,1.2,8,3.3
+              c2.1,2.1,3.3,5,3.3,8.1c0,3-1.2,5.9-3.3,8.1C42.8,47.2,39.9,48.4,36.9,48.4z M36.9,29c-2.1,0-4.1,0.8-5.6,2.3
+              c-1.5,1.5-2.3,3.5-2.3,5.6c0,2.1,0.8,4.1,2.3,5.6c1.5,1.5,3.5,2.3,5.6,2.3c2.1,0,4.1-0.8,5.6-2.3c1.5-1.5,2.3-3.5,2.3-5.6
+              c0-2.1-0.8-4.1-2.3-5.6C41,29.8,39,29,36.9,29z"/>
+      </symbol>
+  
+      <symbol id="compare" viewbox="0 0 74 74">
+          <title>compare</title>
+          <path d="M37,70c-0.9,0-1.7-0.3-2.3-1c-0.6-0.6-0.9-1.4-0.9-2.3V17.9c0-0.9,0.3-1.7,0.9-2.3c0.6-0.6,1.4-1,2.3-1c0.9,0,1.7,0.3,2.3,1
+              c0.6,0.6,0.9,1.4,0.9,2.3v48.8c0,0.9-0.4,1.7-1,2.3C38.7,69.6,37.9,70,37,70z"/>
+          <path d="M62.3,69.9c-0.9,0-1.7-0.3-2.3-1c-0.6-0.6-0.9-1.4-0.9-2.3V7.1c0-0.9,0.3-1.7,0.9-2.3c0.6-0.6,1.4-1,2.3-1
+              c0.9,0,1.7,0.3,2.3,1c0.6,0.6,0.9,1.4,0.9,2.3v59.5c0,0.9-0.3,1.7-0.9,2.3C64,69.5,63.1,69.9,62.3,69.9z"/>
+          <path d="M11.8,70c-0.9,0-1.7-0.3-2.3-1c-0.6-0.6-0.9-1.4-0.9-2.3V40.1c0-0.9,0.3-1.7,0.9-2.3c0.6-0.6,1.4-1,2.3-1
+              c0.9,0,1.7,0.3,2.3,1c0.6,0.6,0.9,1.4,0.9,2.3v26.6c0,0.9-0.3,1.7-0.9,2.3C13.5,69.6,12.6,70,11.8,70z"/>
+      </symbol>
+  
+  
+      <symbol id="car-brand" viewbox="0 0 74 74">
+          <title>car-brand</title>
+              <path d="M56.9,19.2c0,0-0.1-0.1-0.1-0.1c0.1,0.2,0,0-0.1-0.1c0,0-0.1-0.1-0.1-0.1c0,0,0,0,0,0c-0.2-0.2-0.5-0.3-0.7-0.4
+                  c-0.1,0-0.1-0.1-0.2-0.1c0,0,0,0-0.1,0c0,0-0.1,0-0.1-0.1c-0.2-0.1-0.4-0.2-0.6-0.2c-0.6-0.2-1.1-0.3-1.7-0.5
+                  c-1.8-0.4-3.7-0.6-5.6-0.8c-3.1-0.3-6.2-0.3-9.3-0.4c-3.3,0-6.7,0-10,0.3c-2.1,0.1-4.2,0.3-6.2,0.7c-1.2,0.2-2.4,0.5-3.5,0.9
+                  c0,0-0.1,0-0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c-0.1,0-0.2,0.1-0.3,0.1c-0.1,0.1-0.3,0.1-0.4,0.2c-0.1,0.1-0.2,0.1-0.3,0.2
+                  c0,0,0,0,0,0c0,0,0,0,0,0c0,0-0.1,0.1-0.1,0.1c0,0-0.1,0.1-0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0
+                  c-0.1,0.5-1,0.5-1-0.1c0-0.7,0.9-1.2,1.5-1.5c0.9-0.5,2-0.7,3-1c1.9-0.4,3.8-0.7,5.7-0.8c3.1-0.3,6.2-0.4,9.2-0.4
+                  c3.5,0,7,0,10.5,0.2c2.2,0.1,4.4,0.3,6.6,0.7c1.2,0.2,2.4,0.5,3.5,0.9c0.7,0.3,2,0.8,2,1.8c0,0,0,0,0,0
+                  C57.9,19.8,57,19.8,56.9,19.2z M56.7,18.9C56.6,18.9,56.6,18.9,56.7,18.9L56.7,18.9z"/>
+              <path d="M60.8,28.2c-1.5,0.5-3.1,0.9-4.7,1.1c-3.3,0.5-6.6,0.7-10,0.9c-5.5,0.2-11,0.2-16.5,0.1c-3.6-0.1-7.3-0.3-10.9-0.8
+                  c-1.7-0.2-3.5-0.6-5.2-1.1c-0.1,0-0.3-0.1-0.4-0.1c-0.6-0.2-0.3-1.2,0.3-1c1.5,0.5,3.1,0.9,4.7,1.1c3.2,0.5,6.5,0.7,9.8,0.8
+                  c5.5,0.2,11,0.2,16.4,0.1c3.5-0.1,7.3-0.3,10.7-0.8c1.7-0.2,3.4-0.6,5.1-1.1c0.1,0,0.3-0.1,0.4-0.1C61.2,27,61.4,28,60.8,28.2z"/>
+              <path d="M20.4,37.1c0.2,0,0.4,0.1,0.6,0.1c0.1,0,0.2,0,0.4,0.1c0,0,0.1,0,0.1,0c0,0,0.1,0,0.2,0c0.7,0.1,1.4,0.2,2.1,0.2
+                  c2.4,0.2,4.7,0.3,7.1,0.3c3.7,0.1,7.3,0.1,11,0c2.6,0,5.1-0.1,7.7-0.3c0.9-0.1,1.7-0.1,2.6-0.2c0.1,0,0.2,0,0.2,0c0,0,0.1,0,0.1,0
+                  c0,0,0,0,0,0c0,0,0,0,0,0c0.1,0,0.3,0,0.4-0.1c0.2,0,0.5-0.1,0.7-0.1c0.6-0.1,0.9,0.8,0.3,1c-1.2,0.2-2.4,0.3-3.6,0.4
+                  c-2.4,0.2-4.8,0.3-7.2,0.3c-3.7,0.1-7.4,0.1-11.1,0c-2.6,0-5.1-0.1-7.7-0.3c-1.4-0.1-2.8-0.2-4.2-0.5
+                  C19.5,37.9,19.8,36.9,20.4,37.1z"/>
+              <path d="M24.1,55.6c2.7-0.4,5.5-0.4,8.2-0.4c4.8-0.1,9.6-0.1,14.3,0.2c1.1,0.1,2.2,0.1,3.3,0.3c0.3,0,0.4,0.4,0.4,0.6
+                  c-0.1,0.3-0.3,0.4-0.6,0.4c0,0-0.1,0-0.1,0c-0.1,0-0.2,0-0.3,0c-0.2,0-0.4,0-0.6-0.1c-0.5-0.1-1.1-0.1-1.6-0.1
+                  c-1.8-0.1-3.6-0.2-5.4-0.2c-4.7-0.1-9.5-0.1-14.2,0.2c-0.6,0-1.3,0.1-1.9,0.1c-0.2,0-0.5,0-0.7,0.1c-0.1,0-0.2,0-0.3,0
+                  c0,0,0,0,0,0c0,0-0.1,0-0.1,0c-0.3,0-0.5-0.1-0.6-0.4C23.7,56,23.8,55.7,24.1,55.6z M24.5,56.6C24.4,56.6,24.4,56.6,24.5,56.6
+                  L24.5,56.6z"/>
+              <path d="M40.7,44.2c-3.7,0.1-7.4,0.1-11.1-0.1c-0.8,0-1.7-0.1-2.5-0.2c-0.3,0-0.5-0.2-0.5-0.5c0-0.2,0.2-0.5,0.5-0.5
+                  c2.1,0.3,4.2,0.3,6.3,0.3c3.7,0.1,7.4,0.1,11.1-0.1c0.8,0,1.7-0.1,2.5-0.2c0.3,0,0.5,0.3,0.5,0.5c0,0.3-0.2,0.5-0.5,0.5
+                  C44.9,44.1,42.7,44.1,40.7,44.2z"/>
+              <path d="M47,46.3c-2.1,0.3-4.2,0.3-6.3,0.3c-3.7,0.1-7.4,0.1-11.1-0.1c-0.8,0-1.7-0.1-2.5-0.2c-0.3,0-0.5-0.2-0.5-0.5
+                  c0-0.2,0.2-0.5,0.5-0.5c2.1,0.3,4.2,0.3,6.3,0.3c3.7,0.1,7.4,0.1,11.1-0.1c0.8,0,1.7-0.1,2.5-0.2c0.3,0,0.5,0.3,0.5,0.5
+                  C47.5,46.1,47.2,46.3,47,46.3z"/>
+              <path d="M47,48.7C44.9,49,42.7,49,40.7,49c-3.7,0.1-7.4,0.1-11.1-0.1c-0.8,0-1.7-0.1-2.5-0.2c-0.3,0-0.5-0.2-0.5-0.5
+                  c0-0.2,0.2-0.5,0.5-0.5c2.1,0.3,4.2,0.3,6.3,0.3c3.7,0.1,7.4,0.1,11.1-0.1c0.8,0,1.7-0.1,2.5-0.2c0.3,0,0.5,0.3,0.5,0.5
+                  C47.5,48.5,47.2,48.7,47,48.7z"/>
+              <path d="M47,51.2c-2.1,0.3-4.2,0.3-6.3,0.3c-3.7,0.1-7.4,0.1-11.1-0.1c-0.8,0-1.7-0.1-2.5-0.2c-0.3,0-0.5-0.2-0.5-0.5
+                  c0-0.2,0.2-0.5,0.5-0.5c2.1,0.3,4.2,0.3,6.3,0.3c3.7,0.1,7.4,0.1,11.1-0.1c0.8,0,1.7-0.1,2.5-0.2c0.3,0,0.5,0.3,0.5,0.5
+                  C47.5,51,47.2,51.2,47,51.2z"/>
+              <path d="M53.1,41.4c0.1-0.5,0.1-1,0.3-1.4c0.2-0.8,0.8-1.3,1.6-1.5c0.2-0.1,0.5-0.1,0.7-0.2c2.4-0.7,4.7-1.3,7.1-2
+                  c0.7-0.2,1.4-0.4,2.1-0.6c0,0,0.1,0,0.1,0c0.2-0.1,0.4,0.1,0.5,0.2c0.1,0.1,0.1,0.2,0.1,0.4c-0.3,1.1-0.5,2.3-1.2,3.3
+                  c-0.9,1.3-2.3,2.3-3.8,2.6c-1.7,0.3-3.3,0.6-5,0.9c-0.7,0.1-1.4,0.2-2.1,0.4c-0.4,0.1-0.7-0.2-0.6-0.6
+                  C53,42.4,53.1,41.9,53.1,41.4z M58,41.6c0.7-0.1,1.5-0.3,2.2-0.4c1.2-0.2,2.2-0.7,3-1.6c0.7-0.8,1-1.7,1.2-2.7
+                  c-1.5,0.4-3,0.8-4.5,1.2c-1.1,0.3-2.3,0.6-3.4,0.9c-0.6,0.2-1.5,0.3-1.9,0.7c-0.4,0.4-0.4,1.1-0.5,1.7c-0.1,0.3-0.1,0.5-0.2,0.8
+                  C55.3,42.1,56.7,41.9,58,41.6z"/>
+              <path d="M9.2,35.8c1.8,0.5,3.6,1,5.4,1.5c1.2,0.3,2.3,0.6,3.5,1c0.8,0.2,1.7,0.4,2.3,1.1c0.4,0.5,0.5,1.2,0.6,1.8
+                  c0.1,0.5,0.2,1.1,0.3,1.6c0.1,0.4-0.2,0.7-0.6,0.6c-1.6-0.3-3.3-0.6-4.9-0.9c-0.7-0.1-1.4-0.2-2.1-0.4c-1.4-0.2-2.6-1-3.5-2.1
+                  c-0.6-0.7-1-1.6-1.2-2.5c-0.1-0.4-0.2-0.9-0.3-1.3c0-0.2,0-0.3,0.1-0.4c0.1-0.2,0.3-0.3,0.5-0.2C9.1,35.7,9.1,35.8,9.2,35.8z
+                  M10.5,39.2c0.8,1.1,1.9,1.8,3.2,2c1.7,0.3,3.4,0.6,5.1,0.9c0.4,0.1,0.8,0.1,1.2,0.2c-0.1-0.6-0.2-1.3-0.4-1.9
+                  c-0.2-0.9-1.1-1-1.8-1.2c-2.3-0.6-4.7-1.3-7-1.9c-0.4-0.1-0.8-0.2-1.2-0.3C9.8,37.7,10,38.5,10.5,39.2z"/>
+              <path d="M56.3,55c0.1,0,0.2,0,0.2,0c0.5,0,1,0,1.4,0c1,0,2.1-0.1,3.1-0.1c0.7,0,1.3,0.3,1.6,0.9c0.3,0.5,0.8,1.3,0.1,1.7
+                  c-0.3,0.2-0.9,0.2-1.2,0.2c-0.6,0.1-1.2,0.1-1.8,0.2c-0.6,0.1-1.2,0.1-1.8,0c-1-0.2-1.9-0.9-2.4-1.8c0,0,0-0.1,0-0.1c0,0,0,0,0,0
+                  C55.3,55.5,55.7,55,56.3,55z M58,57c0.4,0.1,0.9,0.1,1.3,0.1c0.9-0.1,1.7-0.2,2.6-0.3c0-0.1-0.1-0.2-0.1-0.2
+                  c-0.2-0.4-0.4-0.6-0.8-0.6c-0.8,0-1.6,0-2.4,0.1c-0.6,0-1.1,0-1.7,0c-0.1,0-0.2,0-0.3,0C57,56.4,57.5,56.8,58,57z"/>
+              <path d="M12.9,54.8c0.9,0,1.8,0,2.7,0.1c0.6,0,1.2,0,1.8,0c0.1,0,0.2,0,0.3,0c0.5,0,0.9,0.5,0.7,1.1c0,0,0,0,0,0c0,0,0,0.1,0,0.1
+                  c-0.4,0.8-1.2,1.4-2.1,1.7c-0.6,0.2-1.2,0.2-1.8,0.1c-1-0.1-2-0.2-2.9-0.4c-0.4,0-0.7-0.3-0.8-0.7c0-0.3,0.2-0.6,0.3-0.9
+                  C11.6,55.4,12.1,54.8,12.9,54.8z M17.5,56.1c0,0,0-0.1,0-0.1c0,0,0,0,0,0C17.5,56.1,17.5,56.1,17.5,56.1z M14.4,57
+                  c0.4,0.1,0.9,0.1,1.3,0c0.7-0.1,1.3-0.5,1.7-1.1c-0.1,0-0.1,0-0.2,0c-0.5,0-0.9,0-1.4,0c-0.9,0-1.8,0-2.7-0.1
+                  c-0.4,0-0.7,0.1-0.8,0.4c-0.1,0.1-0.1,0.3-0.2,0.4c0.3,0,0.6,0.1,0.9,0.1C13.4,56.9,13.9,56.9,14.4,57z"/>
+              <path d="M16.7,16.7C16.7,16.7,16.8,16.7,16.7,16.7C16.8,16.7,16.8,16.7,16.7,16.7C16.8,16.7,16.8,16.7,16.7,16.7
+                  C16.8,16.6,16.8,16.7,16.7,16.7z"/>
+              <path d="M4.3,24.6C4.7,24.1,5.3,24,5.8,24c0.6,0,1.1-0.1,1.7-0.1c0.7,0,1.3,0,1.8,0.4c0.6,0.5,0.7,1.1,0.8,1.7
+                  c0.3,0.1,0.5,0.3,0.8,0.4c0.1-0.1,0.1-0.3,0.2-0.4c1.2-2.5,2.5-5.1,3.7-7.6c0.3-0.6,0.6-1.2,0.9-1.8c0.1-0.7,0.9-1.3,1.4-1.6
+                  c0.9-0.5,2-0.9,3-1.2c1.9-0.5,3.8-0.8,5.7-1c3.2-0.3,6.4-0.5,9.5-0.5c3.6,0,7.1,0,10.7,0.3c2.3,0.2,4.5,0.4,6.8,0.9
+                  c1.2,0.3,2.5,0.6,3.6,1.2c0.5,0.3,1.1,0.6,1.5,1.1c0.2,0.2,0.4,0.5,0.4,0.8c0.5,1.1,1,2.1,1.5,3.2c0.9,2,1.9,4.1,2.8,6.1
+                  c0.1,0.2,0.2,0.4,0.3,0.6c0.3-0.2,0.6-0.3,0.9-0.5c0.1-0.6,0.2-1.1,0.6-1.5c0.5-0.5,1.1-0.7,1.8-0.7c0.5,0,1.1,0.1,1.6,0.1
+                  c0.5,0,1,0,1.4,0.2c0.7,0.4,0.9,1.1,0.8,1.9c-0.1,0.7-0.2,1.4-0.8,2c-0.8,0.6-1.9,0.6-2.8,0.7c-0.7,0.1-1.5,0.2-2.2,0.2
+                  c0,0,0,0,0,0c0.3,0.4,0.6,0.8,0.8,1.3c0.1,0.2,0.2,0.2,0.4,0.4c0.3,0.3,0.6,0.7,0.9,1.1c1.1,1.6,1.4,3.8,1.2,5.7
+                  c-0.1,0.6-0.1,1.2-0.2,1.8c0,1.2,0,2.3,0,3.5c0,2.8,0,5.5,0,8.3c0,2.3,0,4.6,0,7c0,0.4,0,0.9,0,1.3c0,0.9-0.5,1.7-1.3,2.1
+                  c-0.5,0.2-0.9,0.2-1.4,0.2c-1.3,0-2.6,0-3.9,0c-1.2,0-2.5,0.2-3.3-0.8c-0.3-0.3-0.4-0.7-0.5-1.1c-0.1,0-0.2,0-0.4,0
+                  c-0.9,0.1-1.8,0-2.7-0.2c-0.5-0.1-1.1-0.2-1.6-0.3C52.2,59,52,59,51.9,59c0,0,0,0,0,0c0.1,0-0.1,0-0.2,0c-0.2,0-0.3,0-0.5,0.1
+                  c-1.3,0.1-2.6,0.2-3.9,0.3c-3.6,0.2-7.2,0.3-10.8,0.3c-3.5,0-7.1-0.1-10.6-0.3c-0.7,0-1.4-0.1-2.1-0.2c-0.6-0.1-1.3-0.1-1.9-0.2
+                  c0,0-0.1,0-0.1,0c0,0,0,0,0,0c-0.1,0-0.2,0-0.2,0.1c-0.2,0.1-0.5,0.1-0.7,0.2c-0.4,0.1-0.8,0.2-1.3,0.3c-0.8,0.2-1.7,0.1-2.5,0.1
+                  c-0.2,0.9-0.8,1.7-1.8,1.9c-0.4,0.1-0.8,0-1.1,0c-1.3,0-2.6,0-3.9,0c-0.4,0-0.8,0-1.2,0c-0.9,0-1.6-0.5-2-1.3
+                  c-0.3-0.6-0.3-1.2-0.3-1.9c0-2.1,0-4.3,0-6.4c0-2.8,0-5.6,0-8.4c0-1.5,0-3,0-4.4c-0.1-1.3-0.3-2.6-0.1-3.9
+                  c0.1-0.9,0.3-1.9,0.7-2.7C7.7,31.7,8.3,31,9,30.4c0.3-0.5,0.5-1,0.8-1.5c-0.6-0.1-1.2-0.1-1.8-0.2c-0.5-0.1-1.1-0.1-1.6-0.2
+                  c-0.3,0-0.7,0-1-0.2c-0.7-0.4-1.1-1.2-1.2-1.9C4,25.8,3.8,25.1,4.3,24.6z M56.8,16.1C56.8,16.1,56.8,16.1,56.8,16.1L56.8,16.1z
+                  M67.5,27.6c0.1,0,0.3,0,0.4,0c0.1,0,0.3-0.1,0.5-0.2C69,27,69,26.4,69,25.8c0-0.3,0-0.6-0.3-0.7C68.7,25,68.5,25,68.4,25
+                  c-0.6,0-1.1-0.1-1.7-0.1c-0.4,0-0.9-0.1-1.3,0.1c-0.2,0.1-0.3,0.2-0.4,0.4c-0.1,0.1-0.1,0.2-0.1,0.3c0,0.1,0,0,0,0.1
+                  c-0.1,0.3,0,0.7-0.3,0.9c-0.4,0.3-0.8,0.4-1.2,0.7c0.1,0.2,0.2,0.4,0.2,0.5c0.7-0.1,1.5-0.2,2.2-0.2
+                  C66.4,27.7,66.9,27.6,67.5,27.6z M59.2,60.4c0.4,0,0.8,0,1.1,0c1.3,0,2.6,0,3.9,0c0.3,0,0.6,0,0.8,0c0.7,0,1.2-0.6,1.2-1.3
+                  c0-0.4,0-0.8,0-1.2c0-2.2,0-4.3,0-6.5c0,0.6-0.1,1.1-0.1,1.7c0,0.6-0.1,1.2-0.1,1.8c0,0.5-0.2,0.9-0.4,1.4
+                  c-0.7,1.6-2.2,2.6-3.9,2.8c-0.7,0.1-1.4,0.1-2.2,0.2c-0.5,0.1-1.1,0.1-1.6,0.2C58.1,60,58.6,60.4,59.2,60.4z M64.9,55.3
+                  C64.9,55.3,64.9,55.3,64.9,55.3L64.9,55.3z M7.8,59c0,0.3,0,0.6,0.2,0.9c0.3,0.5,0.7,0.6,1.2,0.6c1.2,0,2.3,0,3.5,0
+                  c0.6,0,1.1,0,1.7,0c0.4,0,0.8,0,1.1-0.2c0.3-0.2,0.4-0.5,0.5-0.8c-0.9-0.1-1.8-0.2-2.7-0.3c-0.9-0.1-1.8-0.1-2.7-0.5
+                  c-0.8-0.4-1.4-0.9-1.9-1.6c-0.2-0.4-0.4-0.8-0.6-1.2c-0.1-0.2-0.1-0.2-0.2-0.5c-0.1-1.1-0.2-2.1-0.3-3.2c0-0.3,0-0.5-0.1-0.8
+                  c0,2,0,4,0,5.9C7.8,57.9,7.8,58.5,7.8,59z M7.6,35.3c-0.1,0.8,0,1.5,0,2.3c0,0.2,0,0.5,0.1,0.7c0,0.1,0.1,0.2,0.1,0.3
+                  c0,0.2,0,0.4,0,0.5c0.1,0.7,0.1,1.3,0.2,2c0.3,3.8,0.6,7.5,0.9,11.3c0.1,0.9,0.2,1.8,0.2,2.8c0.2,0.3,0.3,0.7,0.5,1
+                  c0.3,0.5,0.6,0.9,1.1,1.2c0.6,0.4,1.2,0.6,1.9,0.7c1.4,0.1,2.7,0.3,4.1,0.4c0.4,0,0.8,0.1,1.2,0.1c0.8,0.1,1.6-0.1,2.4-0.3
+                  c0.4-0.1,0.7-0.2,1.1-0.2c0.3-0.1,0.5-0.1,0.8,0c0.9,0.1,1.8,0.2,2.7,0.2c5,0.4,9.9,0.4,14.9,0.4c2.3,0,4.7-0.1,7-0.2
+                  c0.9-0.1,1.9-0.1,2.8-0.2c0.4,0,0.9-0.1,1.3-0.1c0.4,0,0.9-0.2,1.3-0.1c1.3,0.2,2.7,0.7,4,0.6c1.2-0.1,2.3-0.2,3.5-0.3
+                  c1.2-0.1,2.7-0.1,3.7-0.8c0.5-0.3,0.8-0.7,1.1-1.2c0.1-0.2,0.2-0.4,0.3-0.7c0-0.1,0.1-0.1,0.1-0.2c0,0,0-0.1,0.1-0.1c0,0,0,0,0,0
+                  c0,0,0,0,0,0c0-0.1,0-0.2,0-0.3c0.2-2.4,0.4-4.7,0.6-7.1c0.2-2.8,0.5-5.6,0.7-8.4c0-0.2,0-0.5,0-0.7c0,0,0,0,0-0.1
+                  c0-0.1,0-0.2,0.1-0.3c0-0.3,0-0.6,0.1-0.9c0.1-1.1,0.1-2.3-0.2-3.4c-0.1-0.6-0.4-1.2-0.7-1.7c-0.1-0.2-0.3-0.4-0.5-0.6
+                  c-0.2-0.3-0.5-0.5-0.7-0.7c-0.4-0.5-0.7-1-1-1.5c-0.1-0.1-0.2-0.3-0.2-0.4c-0.4-0.9-0.9-1.9-1.3-2.8c-1.2-2.7-2.5-5.3-3.7-8
+                  c-0.2-0.4-0.3-0.7-0.5-1.1c-0.1-0.2-0.2-0.3-0.2-0.5c0,0,0-0.1,0-0.1c0,0,0,0,0,0c0,0,0-0.1-0.1-0.1c0,0,0,0,0-0.1c0,0,0,0,0,0
+                  c-0.1-0.1-0.2-0.2-0.3-0.3c0,0,0,0,0,0c0,0-0.1-0.1-0.1-0.1c-0.1-0.1-0.2-0.1-0.3-0.2c-0.1-0.1-0.3-0.1-0.4-0.2
+                  c-0.1,0-0.2-0.1-0.2-0.1c0,0-0.2-0.1-0.2-0.1c-2.3-1-4.9-1.3-7.4-1.6c-5.2-0.5-10.5-0.6-15.8-0.4c-3.7,0.1-7.5,0.3-11.1,1.2
+                  c-0.5,0.1-1.1,0.3-1.6,0.4c-0.2,0.1-0.4,0.1-0.6,0.2c-0.1,0-0.2,0.1-0.3,0.1c0,0-0.1,0-0.1,0.1c0,0-0.1,0-0.1,0
+                  c-0.3,0.1-0.6,0.3-0.8,0.4c-0.1,0.1-0.2,0.1-0.3,0.2c0,0-0.1,0.1-0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c-0.1,0.1-0.2,0.2-0.3,0.3
+                  c0,0,0,0,0,0.1c0,0,0,0.1-0.1,0.1c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0c0,0,0,0,0,0
+                  c0,0,0,0,0,0c0,0.2-0.1,0.3-0.2,0.5c-0.2,0.4-0.4,0.7-0.5,1.1c-0.6,1.2-1.2,2.5-1.8,3.7c-1.1,2.3-2.3,4.7-3.4,7
+                  c-0.3,0.6-0.6,1.2-0.9,1.7c0,0.1-0.1,0.2-0.1,0.2c0,0.1-0.1,0.1-0.2,0.1C8.4,32.3,7.8,33.7,7.6,35.3z M5,26.1c0,0.3,0,0.5,0.2,0.7
+                  c0.1,0.2,0.2,0.3,0.3,0.5c0.1,0.1,0.1,0.1,0.2,0.1c0,0,0.1,0,0.1,0c0.1,0,0.1,0,0.2,0c0.5,0.1,0.9,0.1,1.4,0.2
+                  c0.9,0.1,1.9,0.2,2.8,0.3c0.1-0.2,0.2-0.4,0.3-0.6c-0.3-0.2-0.7-0.4-1-0.6c-0.3-0.2-0.3-0.4-0.3-0.7c0-0.3,0-0.5-0.2-0.7
+                  c-0.3-0.5-0.8-0.6-1.3-0.5C7.1,24.9,6.6,25,6,25c-0.4,0-0.9,0-1,0.4C4.9,25.6,5,25.9,5,26.1z"/>
+      </symbol>
+  
+      <symbol id="uncheck" viewbox="0 0 74 74">
+          <title>uncheck</title>
+          <path d="M52,70H22c-9.9,0-18-8.1-18-18V22c0-9.9,8.1-18,18-18h30c9.9,0,18,8.1,18,18v30C70,61.9,61.9,70,52,70z
+              M22,7C13.7,7,7,13.7,7,22v30c0,8.3,6.7,15,15,15h30c8.3,0,15-6.7,15-15V22c0-8.3-6.7-15-15-15H22z"/>
+      </symbol>
+      <symbol id="check" viewbox="0 0 74 74">
+          <title>check</title>
+          <path d="M53.5,3.9h-33C11.5,3.9,4,11.3,4,20.4v33c0,9.1,7.4,16.5,16.5,16.5h33c9.1,0,16.5-7.4,16.5-16.5v-33
+              C70,11.3,62.6,3.9,53.5,3.9z M58,21.9l-22,33c-0.5,0.7-1.2,1.1-2,1.1c0,0,0,0,0,0c-0.8,0-1.6-0.4-2-1.1l-15.6-22
+              c-0.8-1.1-0.5-2.7,0.6-3.5c1.1-0.8,2.7-0.5,3.5,0.6l13.5,19l20-29.9c0.8-1.1,2.3-1.5,3.5-0.7C58.5,19.2,58.8,20.8,58,21.9z"/>
+      </symbol>
+  
+      <symbol id="vkontakte" viewbox="0 0 74 74">
+          <title>vkontakte</title>
+          <path d="M4.1,16.2h11.3C15.7,35.1,24,43,30.6,44.7V16.2h10.6v16.3c6.5-0.7,13.3-8.1,15.6-16.3h10.6c-0.9,4.2-2.6,8.2-5.1,11.8
+              c-2.5,3.5-5.7,6.5-9.4,8.7c4.1,2,7.8,4.9,10.7,8.5c2.9,3.6,5,7.7,6.2,12.1H58.3C57.2,53.5,55,50,52,47.4c-3-2.6-6.8-4.3-10.7-4.8
+              v14.7H40C17.5,57.3,4.6,41.9,4.1,16.2z"/>
+      </symbol>
+      <symbol id="youtube" viewbox="0 0 74 74">
+          <title>youtube</title>
+          <path d="M68.4,21.1c-0.8-2.8-3-5.1-5.8-5.8C57.5,13.9,37,13.9,37,13.9s-20.5,0-25.6,1.4c-2.8,0.8-5,3-5.8,5.8
+              C4.2,26.2,4.2,37,4.2,37s0,10.7,1.4,15.9c0.8,2.8,3,5,5.8,5.7C16.4,60,37,60,37,60s20.5,0,25.6-1.4c2.8-0.8,5-2.9,5.8-5.7
+              c1.4-5.2,1.4-15.9,1.4-15.9S69.8,26.2,68.4,21.1z M30.3,46.8V27.2L47.4,37L30.3,46.8L30.3,46.8z"/>
+      </symbol>
+  
+  </svg>
+  </body>
+</html>

@@ -78,6 +78,8 @@ export default {
         bodies() {return this.$root.bodies}
     },
     mounted() {
+
+        console.log(this.$root.bodies)
     }
 
 }

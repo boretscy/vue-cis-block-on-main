@@ -31,48 +31,54 @@
                             <select 
                                 class="form-select form-select-lg b-radius-small"
                                 v-if="response"
-                                v-model="brand"
+                                v-model="brandIndx"
                                 >
-                                <option selected disabled value="empty">Марка</option>
+                                <option selected value="null">Все бренды</option>
                                 <option
-                                    v-for="item in response.filter.brands"
+                                    v-for="(item, indx) in response.filter.brands"
                                     :key="item.id"
-                                    :value="item.id"
+                                    :value="indx"
                                     >{{ item.name }}</option>
                             </select>
                             <select 
                                 class="form-select form-select-lg b-radius-small"
                                 v-else
                                 >
-                                <option selected disabled value="empty">Марка</option>
+                                <option selected disabled value="null">Все бренды</option>
                             </select>
                         </div>
                         <div class="col">
                             <select 
                                 class="form-select form-select-lg b-radius-small"
-                                v-if="brand != 'empty'"
-                                v-model="model"
+                                v-if="response.filter.brands[brandIndx]"
+                                v-model="modelIndx"
                                 >
-                                <option selected disabled value="empty">Модель</option>
+                                <option selected value="null">Все модели</option>
                                 <option
-                                    v-for="item in models"
+                                    v-for="(item, indx) in response.filter.brands[brandIndx].models"
                                     :key="item.id"
-                                    :value="item.id"
+                                    :value="indx"
                                     >{{ item.name }}</option>
                             </select>
                             <select 
                                 class="form-select form-select-lg b-radius-small"
                                 v-else>
-                                <option selected disabled value="empty">Модель</option>
+                                <option selected disabled value="null">Все модели</option>
                             </select>
                         </div>
                         <div class="col">
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
                                 v-if="response">
-                                <div class="row px-3 py-2 mb-2">
-                                    <div class="col-6 text-start">{{ Format(rangeValue[0]) }} ₽</div>
-                                    <div class="col-6 text-end">{{ Format(rangeValue[1]) }} ₽</div>
+                                <div class="row px-3 pt-1 mb-2">
+                                    <div class="col-6 text-start">
+                                        <div class="text-minus-minus c-yagray" style="line-height: 1;">От</div>
+                                        {{ Format(rangeValue[0]) }} ₽
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div class="text-minus-minus c-yagray" style="line-height: 1;">До</div>
+                                        {{ Format(rangeValue[1]) }} ₽
+                                    </div>
                                 </div>
                                 <section class="cis-filter-on-main-range-slider">
                                     <vue-slider 
@@ -89,7 +95,7 @@
                                 v-else></div>
                         </div>
                         <div class="col">
-                            <a href="#" class="d-block text-center c-yawhite c-h-yawhite bg-yablue bg-h-yadarkblue text-decoration-none b-radius-small but-lg">Показать {{ Format(total) }} авто</a>
+                            <a href="#" class="d-block text-center c-yawhite c-h-yawhite bg-yablue bg-h-yadarkblue text-decoration-none b-radius-small but-lg">Показать {{ Format(totalCount) }} авто</a>
                         </div>
                     </div>
                 </form>
@@ -110,37 +116,45 @@ export default {
     },
     data: function() {
         return {
-            rangeValue: [0, 0]
+            rangeValue: [0, 0],
+            rangeMin: 0,
+            rangeMax: 100000000,
+            brandIndx: null,
+            modelIndx: null,
+            totalCount: 0
         }
     },
     computed: {
 
         link() {return this.$root.link},
-        total() {return this.$root.total},
-        brand() {return this.$root.brand},
-        model() {
-            
-            let res = 'empty'
-            if ( this.$root.brand != 'empty' ) {
-                res = []
-                this.$root.response.filte.models.forEach(function(item) {
-                    if (Number(item.brand_id) == Number(this.$root.brand)) res.push(item)
-                });
-
-                alert(res)
-            }
-            return res
-        },
         response() {return this.$root.response},
-        rangeMin() {return this.$root.rangeMin},
-        rangeMax() {return this.$root.rangeMax},
-        rangeValueC() {return this.$root.rangeValue},
+    },
+    watch: {
+        brandIndx: function(newValue, oldValue) {
+
+            console.log(newValue, oldValue)
+
+            // let total = 0
+            // if ( this.brandIndx == null || this.brandIndx == 'null' ) {
+            //     this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
+            // } else {
+            //     this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
+            // }
+        }
     },
 
     mounted: function() {
 
-        setInterval(() => {
-            this.rangeValue = this.rangeValueC
+        setTimeout(() => {
+            this.rangeMin = Number( this.$root.response.filter.minPrice )
+            this.rangeMax = Number( this.$root.response.filter.maxPrice )
+
+            this.rangeValue = [this.rangeMin, this.rangeMax]
+
+            let total = 0
+            this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
+            this.totalCount = total
+
         }, 500);
     },
 

@@ -27,13 +27,6 @@ export default {
         rangeMax() {return this.$root.rangeMax},
         rangeValueC() {return this.$root.rangeValue}
     },
-    mounted() {
-
-        this.$root.rangeMin = Number( this.$root.response.filter.minPrice )
-        this.$root.rangeMax = Number( this.$root.response.filter.maxPrice )
-
-        this.$root.rangeValue = [this.$root.rangeMin, this.$root.rangeMax]
-    }
 }
 </script>
 

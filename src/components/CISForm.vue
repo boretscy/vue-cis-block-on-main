@@ -85,7 +85,7 @@
                                         v-model="rangeValue"
                                         :min="rangeMin"
                                         :max="rangeMax"
-                                        :interval="1000"
+                                        :interval="rangeInterval"
                                         tooltip="none"
                                         ></vue-slider>
                                 </section>
@@ -121,7 +121,8 @@ export default {
             rangeMax: 100000000,
             brandIndx: null,
             modelIndx: null,
-            totalCount: 0
+            totalCount: 0,
+            rangeInterval: 1
         }
     },
     computed: {
@@ -154,7 +155,6 @@ export default {
             let total = 0
             this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
             this.totalCount = total
-
         }, 500);
     },
 

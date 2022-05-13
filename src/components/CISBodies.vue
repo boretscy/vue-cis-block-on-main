@@ -76,10 +76,6 @@ export default {
     },
     computed: {
         bodies() {return this.$root.bodies}
-    },
-    mounted() {
-
-        console.log(this.$root.bodies)
     }
 
 }

@@ -95,7 +95,10 @@
                                 v-else></div>
                         </div>
                         <div class="col">
-                            <a href="#" class="d-block text-center c-yawhite c-h-yawhite bg-yablue bg-h-yadarkblue text-decoration-none b-radius-small but-lg">Показать {{ Format(totalCount) }} авто</a>
+                            <a 
+                                :href="buttonLink" 
+                                class="d-block text-center c-yawhite c-h-yawhite bg-yablue bg-h-yadarkblue text-decoration-none b-radius-small but-lg"
+                                >Показать {{ Format(totalCount) }} авто</a>
                         </div>
                     </div>
                 </form>
@@ -122,7 +125,8 @@ export default {
             brandIndx: null,
             modelIndx: null,
             totalCount: 0,
-            rangeInterval: 1
+            rangeInterval: 1,
+            buttonLink: '/cars/new'
         }
     },
     computed: {
@@ -140,20 +144,17 @@ export default {
                 total = Number(this.$root.response.filter.brands[newValue].vehicles)
             }
             this.totalCount = total
+
+            this.buildLink()
         }
     },
 
     mounted: function() {
 
         setTimeout(() => {
-            this.rangeMin = Number( this.$root.response.filter.minPrice )
-            this.rangeMax = Number( this.$root.response.filter.maxPrice )
-
-            this.rangeValue = [this.rangeMin, this.rangeMax]
-
-            let total = 0
-            this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
-            this.totalCount = total
+            this.buildRange()
+            this.buildTotal()
+            this.buildLink()
 
             console.log(this.response.filter)
         }, 500);
@@ -161,6 +162,22 @@ export default {
 
     methods: {
 
+        buildLink() {
+
+            this.buttonLink = '/cars/'+this.link
+            if ( this.brandIndx !== null || this.brandIndx != 'null' ) this.buttonLink += '/'+this.response.filter.brands[this.brandIndx].alias
+            this.buttonLink += '?minprice='+this.rangeValue[0]+'&maxprice='+this.rangeValue[1]
+        },
+        buildRange() {
+            this.rangeMin = Number( this.$root.response.filter.minPrice )
+            this.rangeMax = Number( this.$root.response.filter.maxPrice )
+            this.rangeValue = [this.rangeMin, this.rangeMax]
+        },
+        buildTotal() {
+            let total = 0
+            this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
+            this.totalCount = total
+        },
 
 
         Format(q) {

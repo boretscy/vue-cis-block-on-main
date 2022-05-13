@@ -24,7 +24,7 @@
                 :key="item.id"
                 >
                 <a 
-                    :href="'/cars/'+link+'/'+'?brand='+item.alias" 
+                    :href="'/cars/'+link+'/'+item.alias" 
                     class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-h-yayellow py-1 ps-3 shadow-small-h"
                     >
                     {{ item.name }}

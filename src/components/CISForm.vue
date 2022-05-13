@@ -131,16 +131,15 @@ export default {
         response() {return this.$root.response},
     },
     watch: {
-        brandIndx: function(newValue, oldValue) {
+        brandIndx: function(newValue) {
 
-            console.log(newValue, oldValue)
-
-            // let total = 0
-            // if ( this.brandIndx == null || this.brandIndx == 'null' ) {
-            //     this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
-            // } else {
-            //     this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
-            // }
+            let total = 0
+            if ( this.brandIndx == null || this.brandIndx == 'null' ) {
+                this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
+            } else {
+                total = Number(this.$root.response.filter.brands[newValue].vehicles)
+            }
+            this.totalCount = total
         }
     },
 
@@ -155,6 +154,8 @@ export default {
             let total = 0
             this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
             this.totalCount = total
+
+            console.log(this.response.filter)
         }, 500);
     },
 

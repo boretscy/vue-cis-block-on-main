@@ -24,7 +24,7 @@
                 :key="item.id"
                 >
                 <a 
-                    :href="'/cars/'+link+'/'+item.alias" 
+                    :href="'/cars/'+link+'/#/'+item.alias" 
                     class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-1 ps-3 d-flex align-items-center justify-content-between"
                     >
                     {{ item.name }}
@@ -32,19 +32,7 @@
                 </a>
             </div>
         </div>
-        <div
-            class="row mb-5"
-            v-else
-            >
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-            <div class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"><a class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small bg-yalightgray py-1 ps-3">&nbsp;</a></div>
-        </div>
 
-        
     </div>
 </template>
 

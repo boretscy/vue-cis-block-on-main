@@ -23,10 +23,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 48px"></div></div>
-                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 48px"></div></div>
-                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 48px"></div></div>
-                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 48px"></div></div>
+                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 38px"></div></div>
+                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 38px"></div></div>
+                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 38px"></div></div>
+                        <div class="col"><div class="bg-yalightgray b-radius-small" style="height: 38px"></div></div>
                     </div>
                 </form>
             </div>

@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col">
                             <select 
-                                class="form-select form-select-lg b-radius-small"
+                                class="form-select b-radius-small"
                                 v-if="response"
                                 v-model="brandIndx"
                                 >
@@ -41,7 +41,7 @@
                                     >{{ item.name }}</option>
                             </select>
                             <select 
-                                class="form-select form-select-lg b-radius-small"
+                                class="form-select b-radius-small"
                                 v-else
                                 >
                                 <option selected disabled value="null">Все бренды</option>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col">
                             <select 
-                                class="form-select form-select-lg b-radius-small"
+                                class="form-select b-radius-small"
                                 v-if="response.filter.brands[brandIndx]"
                                 v-model="modelIndx"
                                 >
@@ -61,7 +61,7 @@
                                     >{{ item.name }}</option>
                             </select>
                             <select 
-                                class="form-select form-select-lg b-radius-small"
+                                class="form-select b-radius-small"
                                 v-else>
                                 <option selected disabled value="null">Все модели</option>
                             </select>
@@ -70,7 +70,7 @@
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
                                 v-if="response">
-                                <div class="row px-3 pt-1 mb-2 align-items-center" style="height: 38px">
+                                <div class="row px-3 pt-1 mb-2 align-items-center" style="height: 28px">
                                     <div class="col-6 text-start">
                                         {{ Format(rangeValue[0]) }} ₽
                                     </div>
@@ -96,6 +96,7 @@
                             <a 
                                 :href="buttonLink" 
                                 class="d-block text-center c-yawhite c-h-yawhite bg-yablue bg-h-yadarkblue text-decoration-none b-radius-small but-lg"
+                                style="padding: 7px;"
                                 >Показать {{ Format(totalCount) }} авто</a>
                         </div>
                     </div>

@@ -155,6 +155,7 @@ export default {
 
         setTimeout(() => {
             this.buildRange()
+            this.buildBrands() 
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
 

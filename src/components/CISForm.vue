@@ -63,7 +63,7 @@
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
                                 v-if="response">
-                                <div class="row px-3 pt-1 mb-2 align-items-center" style="height: 28px">
+                                <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start">
                                         {{ Format(rangeValue[0]) }} ₽
                                     </div>
@@ -89,7 +89,7 @@
                             <a 
                                 :href="buttonLink" 
                                 class="d-block text-center c-yawhite c-h-yawhite bg-h-yablue bg-yadarkblue text-decoration-none b-radius-small but-lg"
-                                style="padding: 7px;"
+                                style="padding: 10px;"
                                 >Показать {{ Format(totalCount) }} авто</a>
                         </div>
                     </div>
@@ -269,117 +269,158 @@ export default {
     text-align: center;
 }
 
+fieldset[disabled] .multiselect {
+  pointer-events: none;
+}
 .multiselect__spinner {
   position: absolute;
   right: 1px;
   top: 1px;
-  width: 3rem;
-  height: 2.1875rem;
+  width: 48px;
+  height: 35px;
   background: var(--yawhite);
-  display: block; }
-  .multiselect__spinner:before, .multiselect__spinner:after {
-    position: absolute;
-    content: '';
-    top: 50%;
-    left: 50%;
-    margin: 0.875rem 0 0 0.875rem;
-    width: 1rem;
-    height: 1rem;
-    border-radius: 100%;
-    border-color: var(--yablue) transparent transparent;
-    border-style: solid;
-    border-width: 2px;
-    box-shadow: 0 0 0 1px transparent; }
-  .multiselect__spinner:before {
-    animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);
-    animation-iteration-count: infinite; }
-  .multiselect__spinner:after {
-    animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);
-    animation-iteration-count: infinite; }
-
-.multiselect__loading-transition {
+  display: block;
+}
+.multiselect__spinner:before,
+.multiselect__spinner:after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 50%;
+  margin: -8px 0 0 -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border-color: var(--yadarkblue) transparent transparent;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 0 0 1px transparent;
+}
+.multiselect__spinner:before {
+  animation: spinning 2.4s cubic-bezier(0.41, 0.26, 0.2, 0.62);
+  animation-iteration-count: infinite;
+}
+.multiselect__spinner:after {
+  animation: spinning 2.4s cubic-bezier(0.51, 0.09, 0.21, 0.8);
+  animation-iteration-count: infinite;
+}
+.multiselect__loading-enter-active,
+.multiselect__loading-leave-active {
   transition: opacity 0.4s ease-in-out;
-  opacity: 1; }
-
+  opacity: 1;
+}
 .multiselect__loading-enter,
-.multiselect__loading-leave {
-  opacity: 0; }
-
+.multiselect__loading-leave-active {
+  opacity: 0;
+}
 .multiselect,
 .multiselect__input,
 .multiselect__single {
   font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: lighter; }
-
+  font-size: 16px;
+  touch-action: manipulation;
+}
 .multiselect {
   box-sizing: content-box;
   display: block;
   position: relative;
   width: 100%;
-  min-height: 2.5rem;
+  min-height: 40px;
   text-align: left;
-  color: var(--yablack); }
-  .multiselect * {
-    box-sizing: border-box; }
-  .multiselect:focus {
-    outline: none; }
-  .multiselect--active {
-    z-index: 50; }
-    .multiselect--active .multiselect__current,
-    .multiselect--active .multiselect__input,
-    .multiselect--active .multiselect__tags {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0; }
-    .multiselect--active .multiselect__select {
-      transform: rotateZ(180deg); }
-
+  color: var(--yablack);
+}
+.multiselect * {
+  box-sizing: border-box;
+}
+.multiselect:focus {
+  outline: none;
+}
+.multiselect--disabled {
+  background: #ededed;
+  pointer-events: none;
+  opacity: 0.6;
+}
+.multiselect--active {
+  z-index: 50;
+}
+.multiselect--active:not(.multiselect--above) .multiselect__current,
+.multiselect--active:not(.multiselect--above) .multiselect__input,
+.multiselect--active:not(.multiselect--above) .multiselect__tags {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.multiselect--active .var(--yadarkblue) {
+  transform: rotateZ(180deg);
+}
+.multiselect--above.multiselect--active .multiselect__current,
+.multiselect--above.multiselect--active .multiselect__input,
+.multiselect--above.multiselect--active .multiselect__tags {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 .multiselect__input,
 .multiselect__single {
   position: relative;
   display: inline-block;
-  min-height: 1.25rem;
-  line-height: 1.25rem;
+  min-height: 20px;
+  line-height: 20px;
   border: none;
   border-radius: 5px;
   background: var(--yawhite);
-  padding: 1px 0 0 0.3125rem;
-  width: auto;
-  transition: border .1s ease;
+  padding: 0 0 0 5px;
+  width: calc(100%);
+  transition: border 0.1s ease;
   box-sizing: border-box;
-  margin-bottom: 0.5rem; }
-  .multiselect__input:hover,
-  .multiselect__single:hover {
-    border-color: #cfcfcf; }
-  .multiselect__input:focus,
-  .multiselect__single:focus {
-    border-color: #a8a8a8;
-    outline: none; }
-
+  margin-bottom: 8px;
+  vertical-align: top;
+}
+.multiselect__input::placeholder {
+  color: var(--yablack);
+}
+.multiselect__tag ~ .multiselect__input,
+.multiselect__tag ~ .multiselect__single {
+  width: auto;
+}
+.multiselect__input:hover,
+.multiselect__single:hover {
+  border-color: #cfcfcf;
+}
+.multiselect__input:focus,
+.multiselect__single:focus {
+  border-color: #a8a8a8;
+  outline: none;
+}
 .multiselect__single {
-  padding-left: 0.375rem;
-  margin-bottom: 0.5rem; }
-
+  padding-left: 5px;
+  margin-bottom: 8px;
+}
+.multiselect__tags-wrap {
+  display: inline;
+}
 .multiselect__tags {
-  min-height: 2.5rem;
+  min-height: 40px;
   display: block;
-  padding: 0.5rem 2.5rem 0 0.5rem;
+  padding: 10px 40px 0 10px;
   border-radius: 5px;
   border: 1px solid var(--yagray);
-  background: var(--yawhite); 
-  font-size: 12px;}
-
+  background: var(--yawhite);
+  font-size: 14px;
+}
 .multiselect__tag {
   position: relative;
   display: inline-block;
-  padding: 0.25rem 1.625rem 0.25rem 0.625rem;
+  padding: 4px 26px 4px 10px;
   border-radius: 5px;
-  margin-right: 0.625rem;
+  margin-right: 10px;
   color: var(--yawhite);
   line-height: 1;
-  background: var(--yablue);
-  margin-bottom: 0.5rem; }
-
+  background: var(--yadarkblue);
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
 .multiselect__tag-icon {
   cursor: pointer;
   margin-left: 7px;
@@ -389,153 +430,242 @@ export default {
   bottom: 0;
   font-weight: 700;
   font-style: initial;
-  width: 1.375rem;
+  width: 22px;
   text-align: center;
-  line-height: 1.375rem;
+  line-height: 22px;
   transition: all 0.2s ease;
-  border-radius: 5px; }
-  .multiselect__tag-icon:after {
-    content: "\00D7";
-    color: var(--yagray);
-    font-size: 0.875rem; }
-  .multiselect__tag-icon:focus, .multiselect__tag-icon:hover {
-    background: var(--yadarkblue); }
-    .multiselect__tag-icon:focus:after, .multiselect__tag-icon:hover:after {
-      color: white; }
-
+  border-radius: 5px;
+}
+.multiselect__tag-icon:after {
+  content: "×";
+  color: var(--yayellow);
+  font-size: 14px;
+}
+.multiselect__tag-icon:focus,
+.multiselect__tag-icon:hover {
+  background: var(--yayellow);
+  color: var(--yadarkblue);
+}
+.multiselect__tag-icon:focus:after,
+.multiselect__tag-icon:hover:after {
+  color: white;
+}
 .multiselect__current {
-  line-height: 1rem;
-  min-height: 2.5rem;
+  line-height: 16px;
+  min-height: 40px;
   box-sizing: border-box;
   display: block;
   overflow: hidden;
-  padding: 0.5rem 0.75rem 0;
-  padding-right: 1.875rem;
+  padding: 8px 12px 0;
+  padding-right: 30px;
   white-space: nowrap;
   margin: 0;
   text-decoration: none;
   border-radius: 5px;
   border: 1px solid var(--yagray);
-  cursor: pointer; }
-
+  cursor: pointer;
+}
 .multiselect__select {
-  line-height: 1rem;
+  line-height: 16px;
   display: block;
   position: absolute;
   box-sizing: border-box;
-  width: 2.5rem;
-  height: 2.375rem;
+  width: 40px;
+  height: 42px;
   right: 1px;
   top: 1px;
-  padding: 0.25rem 0.5rem;
+  padding: 4px 8px;
   margin: 0;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s ease; }
-  .multiselect__select:before {
-    position: relative;
-    right: 0;
-    top: 65%;
-    color: #999;
-    margin-top: 0.25rem;
-    border-style: solid;
-    border-width: 0.3125rem 0.3125rem 0 0.3125rem;
-    border-color: #999999 transparent transparent transparent;
-    content: ""; }
-
+  transition: transform 0.2s ease;
+}
+.multiselect__select:before {
+  position: relative;
+  right: 0;
+  top: 65%;
+  color: var(--yamiddlegray);
+  margin-top: 4px;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: var(--yamiddlegray) transparent transparent transparent;
+  content: "";
+}
 .multiselect__placeholder {
   color: var(--yablack);
   display: inline-block;
-  margin-bottom: 0rem;
-    padding-top: 0rem;
-    font-size: 16px; }
-  .multiselect--active .multiselect__placeholder {
-    display: none; }
-
-.multiselect__content {
+  margin-bottom: 10px;
+  padding-top: 2px;
+}
+.multiselect--active .multiselect__placeholder {
+  display: none;
+}
+.multiselect__content-wrapper {
   position: absolute;
-  list-style: none;
   display: block;
   background: var(--yawhite);
   width: 100%;
-  max-height: 15rem;
+  max-height: 240px;
   overflow: auto;
-  padding: 0;
-  margin: 0;
   border: 1px solid var(--yagray);
   border-top: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  z-index: 50; }
-  .multiselect__content::webkit-scrollbar {
-    display: none; }
-
+  z-index: 50;
+  -webkit-overflow-scrolling: touch;
+}
+.multiselect__content {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+  vertical-align: top;
+}
+.multiselect--above .multiselect__content-wrapper {
+  bottom: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: none;
+  border-top: 1px solid var(--yagray);
+}
+.multiselect__content::webkit-scrollbar {
+  display: none;
+}
+.multiselect__element {
+  display: block;
+}
 .multiselect__option {
   display: block;
-  padding: 0.75rem;
-  min-height: 2.5rem;
-  line-height: 1rem;
-  font-weight: 300;
+  padding: 12px;
+  min-height: 40px;
+  line-height: 16px;
   text-decoration: none;
   text-transform: none;
   vertical-align: middle;
   position: relative;
-  cursor: pointer; }
-  .multiselect__option:after {
-    top: 0;
-    right: 0;
-    position: absolute;
-    line-height: 2.5rem;
-    padding-right: 0.75rem;
-    padding-left: 1.25rem; }
-  .multiselect__option--highlight {
-    background: var(--yalightblue);
-    outline: none;
-    color: white; }
-    .multiselect__option--highlight:after {
-      content: attr(data-select);
-      color: white; }
-  .multiselect__option--selected {
-    background: #F3F3F3;
-    color: var(--yablack);
-    font-weight: bold; }
-    .multiselect__option--selected:after {
-      content: attr(data-selected);
-      font-weight: 300;
-      color: silver; }
-
+  cursor: pointer;
+  white-space: nowrap;
+}
+.multiselect__option:after {
+  top: 0;
+  right: 0;
+  position: absolute;
+  line-height: 40px;
+  padding-right: 12px;
+  padding-left: 20px;
+  font-size: 13px;
+}
+.multiselect__option--highlight {
+  background: var(--yadarkblue);
+  outline: none;
+  color: white;
+}
+.multiselect__option--highlight:after {
+  content: attr(data-select);
+  background: var(--yadarkblue);
+  color: white;
+}
+.multiselect__option--selected {
+  background: #f3f3f3;
+  color: var(--yablack);
+  font-weight: bold;
+}
+.multiselect__option--selected:after {
+  content: attr(data-selected);
+  color: silver;
+}
 .multiselect__option--selected.multiselect__option--highlight {
-  background: #FF6A6A;
+  background: #ff6a6a;
   color: var(--yawhite);
-  font-weight: lighter; }
-  .multiselect__option--selected.multiselect__option--highlight:after {
-    content: attr(data-deselect);
-    color: var(--yawhite); }
-
-.multiselect--disabled {
-  background: #ededed;
-  pointer-events: none; }
-  .multiselect--disabled .multiselect__current,
-  .multiselect--disabled .multiselect__select {
-    background: #ededed;
-    color: #a6a6a6; }
-
-.multiselect__option--disabled {
+}
+.multiselect__option--selected.multiselect__option--highlight:after {
+  background: #ff6a6a;
+  content: attr(data-deselect);
+  color: var(--yawhite);
+}
+.multiselect--disabled .multiselect__current,
+.multiselect--disabled .multiselect__select {
   background: #ededed;
   color: #a6a6a6;
+}
+.multiselect__option--disabled {
+  background: #ededed !important;
+  color: #a6a6a6 !important;
   cursor: text;
-  pointer-events: none; }
-  .multiselect__option--disabled:visited {
-    color: #a6a6a6; }
-  .multiselect__option--disabled:hover, .multiselect__option--disabled:focus {
-    background: #3dad7b; }
-
-.multiselect-transition {
-  transition: all .3s ease; }
-
-.multiselect-enter, .multiselect-leave {
+  pointer-events: none;
+}
+.multiselect__option--group {
+  background: #ededed;
+  color: var(--yablack);
+}
+.multiselect__option--group.multiselect__option--highlight {
+  background: var(--yablack);
+  color: var(--yawhite);
+}
+.multiselect__option--group.multiselect__option--highlight:after {
+  background: var(--yablack);
+}
+.multiselect__option--disabled.multiselect__option--highlight {
+  background: #dedede;
+}
+.multiselect__option--group-selected.multiselect__option--highlight {
+  background: #ff6a6a;
+  color: var(--yawhite);
+}
+.multiselect__option--group-selected.multiselect__option--highlight:after {
+  background: #ff6a6a;
+  content: attr(data-deselect);
+  color: var(--yawhite);
+}
+.multiselect-enter-active,
+.multiselect-leave-active {
+  transition: all 0.15s ease;
+}
+.multiselect-enter,
+.multiselect-leave-active {
   opacity: 0;
-  max-height: 0 !important; }
-
+}
+.multiselect__strong {
+  margin-bottom: 8px;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: top;
+}
+*[dir="rtl"] .multiselect {
+  text-align: right;
+}
+*[dir="rtl"] .multiselect__select {
+  right: auto;
+  left: 1px;
+}
+*[dir="rtl"] .multiselect__tags {
+  padding: 8px 8px 0px 40px;
+}
+*[dir="rtl"] .multiselect__content {
+  text-align: right;
+}
+*[dir="rtl"] .multiselect__option:after {
+  right: auto;
+  left: 0;
+}
+*[dir="rtl"] .multiselect__clear {
+  right: auto;
+  left: 12px;
+}
+*[dir="rtl"] .multiselect__spinner {
+  right: auto;
+  left: 1px;
+}
+@keyframes spinning {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(2turn);
+  }
+}
 </style>

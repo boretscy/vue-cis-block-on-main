@@ -400,6 +400,7 @@ fieldset[disabled] .multiselect {
   border: 1px solid var(--yagray);
   background: var(--yawhite);
   font-size: 14px;
+  min-height: 45px;
 }
 .multiselect__tag {
   position: relative;
@@ -410,7 +411,7 @@ fieldset[disabled] .multiselect {
   color: var(--yawhite);
   line-height: 1;
   background: var(--yadarkblue);
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   white-space: nowrap;
   overflow: hidden;
   max-width: 100%;

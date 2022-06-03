@@ -144,6 +144,10 @@ export default {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
             this.modelOptions = this.buildModels()
+        },
+        modelValue: function() {
+            this.buttonLink = this.buildLink()
+            this.totalCount = this.buildTotal()
         }
     },
 
@@ -151,8 +155,8 @@ export default {
 
         setTimeout(() => {
             this.buildRange()
-            this.buildTotal()
-            this.buildBrands() 
+            this.buttonLink = this.buildLink()
+            this.totalCount = this.buildTotal()
 
             console.log(this.response.filter)
         }, 500);
@@ -164,14 +168,20 @@ export default {
 
             let s = '/cars/'+this.link+'/filter?'
             if ( this.brandValue.length) {
+                s += '&brand='
+                let b = []
                 this.brandValue.forEach( function(item) {
-                    s += '&brand='+item.code
+                    b.push(item.code)
                 })
+                s += b.join(',')
             }
             if ( this.modelValue.length) {
+                s += '&model='
+                let m = []
                 this.modelValue.forEach( function(item) {
-                    s += '&model='+item.code
+                    m.push(item.code)
                 })
+                s += m.join(',')
             }
             s += '&minprice='+this.rangeValue[0]+'&maxprice='+this.rangeValue[1]
 

@@ -41,7 +41,7 @@
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
                                 deselectLabel="Удалить"
-                                @tag="addBrandTag"></multiselect>
+                                ></multiselect>
                         </div>
                         <div class="col">
                             <multiselect 
@@ -57,7 +57,7 @@
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
                                 deselectLabel="Удалить"
-                                @tag="addBrandTag"></multiselect>
+                                ></multiselect>
                         </div>
                         <div class="col">
                             <div 
@@ -234,31 +234,15 @@ export default {
 
 
         buildRange() {
+            
             this.rangeMin = Number( this.$root.response.filter.minPrice )
             this.rangeMax = Number( this.$root.response.filter.maxPrice )
             this.rangeValue = [this.rangeMin, this.rangeMax]
         },
 
+        getBrands( q ) {
 
-        addBrandTag (newTag) {
-
-            console.log('asf', newTag)
-
-            // const tag = {
-            //     name: newTag,
-            //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-            // }
-
-            // console.log(tag)
-            // this.brandOptions.push(tag)
-            // this.brandValue.push(tag)
-            
-            // let total = 0
-            // if ( this.brandValue == null || this.brandValue == 'null' || this.brandValue == [] ) {
-            //     this.$root.response.filter.brands.forEach(function(item) { total += Number(item.vehicles) })
-            // } else {
-            //     console.log(newTag, total)
-            // }
+            this.$root.link = q
         },
 
 
@@ -571,32 +555,32 @@ fieldset[disabled] .multiselect {
   font-size: 13px;
 }
 .multiselect__option--highlight {
-  background: var(--yadarkblue);
+  background: var(--yalightgray);
   outline: none;
-  color: white;
+  color: var(--yablack);
 }
 .multiselect__option--highlight:after {
   content: attr(data-select);
-  background: var(--yadarkblue);
-  color: white;
+  background: var(--yalightgray);
+  color: var(--yamiddlegray);
 }
 .multiselect__option--selected {
-  background: #f3f3f3;
+  background: var(--yalightgray);
   color: var(--yablack);
   font-weight: bold;
 }
 .multiselect__option--selected:after {
   content: attr(data-selected);
-  color: silver;
+  color: var(--yamiddlegray);
 }
 .multiselect__option--selected.multiselect__option--highlight {
-  background: #ff6a6a;
-  color: var(--yawhite);
+  background: var(--yalightgray);
+  color: var(--yamiddlegray);
 }
 .multiselect__option--selected.multiselect__option--highlight:after {
-  background: #ff6a6a;
+  background: var(--yalightgray);
   content: attr(data-deselect);
-  color: var(--yawhite);
+  color: var(--yamiddlegray);
 }
 .multiselect--disabled .multiselect__current,
 .multiselect--disabled .multiselect__select {
@@ -614,7 +598,7 @@ fieldset[disabled] .multiselect {
   color: var(--yablack);
 }
 .multiselect__option--group.multiselect__option--highlight {
-  background: var(--yablack);
+  background: var(--yamiddlegray);
   color: var(--yawhite);
 }
 .multiselect__option--group.multiselect__option--highlight:after {
@@ -624,11 +608,11 @@ fieldset[disabled] .multiselect {
   background: #dedede;
 }
 .multiselect__option--group-selected.multiselect__option--highlight {
-  background: #ff6a6a;
+  background: var(--yalightgray);
   color: var(--yawhite);
 }
 .multiselect__option--group-selected.multiselect__option--highlight:after {
-  background: #ff6a6a;
+  background: var(--yalightgray);
   content: attr(data-deselect);
   color: var(--yawhite);
 }

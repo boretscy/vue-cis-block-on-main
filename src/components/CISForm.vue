@@ -161,7 +161,6 @@ export default {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
 
-            // console.log(this.response)
         }, 500);
     },
 
@@ -264,39 +263,14 @@ export default {
                     }
                 }
             }
-            console.log([min, max])
+            
             if ( min > max ) {
                 let r = min
                 min = max
                 max = r
 
             }
-            // this.$root.response.forEach( function(branditem) {
-            //     branditem.models.forEach( function(modelitem) {
-            //         if (b.length) {
-            //             if (m.length) {
-            //                 b.forEach( function(bitem) {
-            //                     m.forEach( function(mitem) {
-            //                         if ( branditem.alias == bitem.code && modelitem.alias == mitem.code ) {
-            //                             if (modelitem.minPrice < min) modelitem.minPrice = min
-            //                             if (modelitem.maxPrice > max) modelitem.maxPrice = max
-            //                         }
-            //                     })
-            //                 })
-            //             } else {
-            //                 b.forEach( function(bitem) {
-            //                     if (branditem.alias == bitem.code) {
-            //                         if (modelitem.minPrice < min) modelitem.minPrice = min
-            //                         if (modelitem.maxPrice > max) modelitem.maxPrice = max
-            //                     }
-            //                 })
-            //             }
-            //         } else {
-            //             if (modelitem.minPrice < min) modelitem.minPrice = min
-            //             if (modelitem.maxPrice > max) modelitem.maxPrice = max
-            //         }
-            //     })
-            // })       
+                 
             this.rangeMin = min
             this.rangeMax = max
             this.rangeValue = [min, max]

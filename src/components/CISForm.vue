@@ -144,10 +144,12 @@ export default {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
             this.modelOptions = this.buildModels()
+            this.buildRange()
         },
         modelValue: function() {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
+            this.buildRange()
         }
     },
 
@@ -159,7 +161,7 @@ export default {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
 
-            console.log(this.response.filter)
+            // console.log(this.response)
         }, 500);
     },
 
@@ -191,41 +193,42 @@ export default {
         buildBrands() {
 
             let s = this.brandOptions
-            this.$root.response.filter.brands.forEach(function(item) { 
+            for (let i in this.$root.response ) {
                 s.push(
-                    { name: item.name, code: item.alias }
+                    { name: this.$root.response[i].name, code: this.$root.response[i].alias }
                 )
-            })
+            }
         },
         buildModels() {
 
+            this.modelValue = []
             let b = this.brandValue, res = []
             if ( b.length ) {
-                this.$root.response.filter.brands.forEach(function(branditem) { 
+                let s = this.$root.response
+                for (let i in s ) {
                     b.forEach( function(item) {
-                        if ( branditem.alias == item.code ) {
-                            branditem.models.forEach( function(modelitem) {
-                                res.push({ name: modelitem.name, code: modelitem.id })
-                            })
+                        if ( s[i].alias == item.code ) {
+                            for ( let k in s[i].models ) {
+                                res.push({ name: s[i].models[k].name, code: s[i].models[k].alias })
+                            }
                         }
                     })
-                })
+                }
             }
-
             return res
         },
         buildTotal() {
             
             let res = 0
             if ( this.brandValue.length ) {
-                let s = this.brandValue
-                this.$root.response.filter.brands.forEach(function(branditem) {
-                    s.forEach( function(tagitem) {
-                        if (branditem.alias == tagitem.code) res += Number(branditem.vehicles)
+                let s = this.$root.response
+                for ( let ib in s ) {
+                    this.brandValue.forEach( function(tagitem) {
+                        if (s[ib].alias == tagitem.code) res += Number(s[ib].vehicles)
                     })
-                })
+                }
             } else {
-                this.$root.response.filter.brands.forEach(function(item) { res += Number(item.vehicles) })
+                for ( let ib in this.$root.response ) { res += Number(this.$root.response[ib].vehicles) }
             }
 
             return res
@@ -234,10 +237,69 @@ export default {
 
 
         buildRange() {
-            
-            this.rangeMin = Number( this.$root.response.filter.minPrice )
-            this.rangeMax = Number( this.$root.response.filter.maxPrice )
-            this.rangeValue = [this.rangeMin, this.rangeMax]
+            let min = 100000000, max = 0, b = this.brandValue, m = this.modelValue, s = this.$root.response
+            for ( let ib in s ) {
+                for ( let im in s[ib].models ) {
+                    if (b.length) {
+                        if (m.length) {
+                            b.forEach( function(bitem) {
+                                m.forEach( function(mitem) {
+                                    if ( s[ib].alias == bitem.code && s[ib].models[im].alias == mitem.code ) {
+                                        if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
+                                        if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
+                                    }
+                                })
+                            })
+                        } else {
+                            b.forEach( function(bitem) {
+                                if (s[ib].alias == bitem.code) {
+                                    if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
+                                    if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
+                                }
+                            })
+                        }
+                    } else {
+                        if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
+                        if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
+                    }
+                }
+            }
+            console.log([min, max])
+            if ( min > max ) {
+                let r = min
+                min = max
+                max = r
+
+            }
+            // this.$root.response.forEach( function(branditem) {
+            //     branditem.models.forEach( function(modelitem) {
+            //         if (b.length) {
+            //             if (m.length) {
+            //                 b.forEach( function(bitem) {
+            //                     m.forEach( function(mitem) {
+            //                         if ( branditem.alias == bitem.code && modelitem.alias == mitem.code ) {
+            //                             if (modelitem.minPrice < min) modelitem.minPrice = min
+            //                             if (modelitem.maxPrice > max) modelitem.maxPrice = max
+            //                         }
+            //                     })
+            //                 })
+            //             } else {
+            //                 b.forEach( function(bitem) {
+            //                     if (branditem.alias == bitem.code) {
+            //                         if (modelitem.minPrice < min) modelitem.minPrice = min
+            //                         if (modelitem.maxPrice > max) modelitem.maxPrice = max
+            //                     }
+            //                 })
+            //             }
+            //         } else {
+            //             if (modelitem.minPrice < min) modelitem.minPrice = min
+            //             if (modelitem.maxPrice > max) modelitem.maxPrice = max
+            //         }
+            //     })
+            // })       
+            this.rangeMin = min
+            this.rangeMax = max
+            this.rangeValue = [min, max]
         },
 
         getBrands( q ) {
@@ -344,7 +406,7 @@ fieldset[disabled] .multiselect {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.multiselect--active .var(--yadarkblue) {
+.multiselect--active .multiselect__select {
   transform: rotateZ(180deg);
 }
 .multiselect--above.multiselect--active .multiselect__current,

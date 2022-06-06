@@ -41,7 +41,7 @@ export default {
     name: 'CISBrands',
     computed: {
         link() {return this.$root.link},
-        brands() {return this.$root.response.filter.brands}
+        brands() {return this.$root.response}
     }
 }
 </script>

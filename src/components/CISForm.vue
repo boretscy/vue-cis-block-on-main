@@ -169,7 +169,7 @@ export default {
 
         buildLink() {
 
-            let s = '/cars/'+this.link+'/filter?'
+            let s = '/cars/'+this.link+'/#/filter?'
             if ( this.brandValue.length) {
                 s += '&brand='
                 let b = []

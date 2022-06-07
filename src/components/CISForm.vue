@@ -36,12 +36,15 @@
                                 track-by="code" 
                                 :options="brandOptions" 
                                 :multiple="true" 
-                                :taggable="true" 
                                 :searchable="false"
+                                :close-on-select="false" 
+                                :clear-on-select="false"
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
                                 deselectLabel="Удалить"
-                                ></multiselect>
+                                >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
+                                </multiselect>
                         </div>
                         <div class="col">
                             <multiselect 
@@ -52,7 +55,6 @@
                                 track-by="code" 
                                 :options="modelOptions" 
                                 :multiple="true" 
-                                :taggable="true" 
                                 :searchable="false"
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
@@ -356,7 +358,7 @@ fieldset[disabled] .multiselect {
   display: block;
   position: relative;
   width: 100%;
-  min-height: 40px;
+  height: 40px;
   text-align: left;
   color: var(--yablack);
 }

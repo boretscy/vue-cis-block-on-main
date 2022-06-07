@@ -37,8 +37,6 @@
                                 :options="brandOptions" 
                                 :multiple="true" 
                                 :searchable="false"
-                                :close-on-select="false" 
-                                :clear-on-select="false"
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
                                 deselectLabel="Удалить"
@@ -59,7 +57,9 @@
                                 selectLabel="Выбрать"
                                 selectedLabel="Выбрано"
                                 deselectLabel="Удалить"
-                                ></multiselect>
+                                >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
+                                </multiselect>
                         </div>
                         <div class="col">
                             <div 

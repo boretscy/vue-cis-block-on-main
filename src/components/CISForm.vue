@@ -27,7 +27,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-xl-4 mb-3">
+                        <div class="col-md-6 col-xl-3 mb-3">
                             <multiselect 
                                 v-model="brandValue" 
                                 tag-placeholder="Выбрать бренд" 
@@ -46,7 +46,7 @@
                                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
                                 </multiselect>
                         </div>
-                        <div class="col-md-6 col-xl-4 mb-3">
+                        <div class="col-md-6 col-xl-3 mb-3">
                             <multiselect 
                                 v-model="modelValue" 
                                 tag-placeholder="Выбрать модель" 
@@ -65,7 +65,7 @@
                                 <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
                                 </multiselect>
                         </div>
-                        <div class="col-md-6 col-xl-4 mb-3">
+                        <div class="col-md-6 col-xl-3 mb-3">
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
                                 v-if="response">
@@ -91,7 +91,7 @@
                                 class="bg-yawhite b-yagray b-radius-small py-4"
                                 v-else></div>
                         </div>
-                        <div class="col-md-6 col-xl-4 mb-3">
+                        <div class="col-md-6 col-xl-3 mb-3">
                             <a 
                                 :href="buttonLink" 
                                 class="d-block text-center c-yawhite c-h-yawhite bg-h-yablue bg-yadarkblue text-decoration-none b-radius-small but-lg"

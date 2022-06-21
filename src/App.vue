@@ -1,7 +1,7 @@
 <template>
     <div class="container my-5" id="CISMAinBlock">
-        <CISForm v-if="response" />
-        <CISFormEmpty v-if="!response" />
+        <CISForm />
+        <!-- <CISFormEmpty v-if="!response" /> -->
         <CISBrands v-if="response" />
         <CISBrandsEmpty v-if="!response" />
         <CISBodies />
@@ -11,7 +11,7 @@
 <script>
 
 import CISForm from './components/CISForm.vue'
-import CISFormEmpty from './components/CISFormEmpty.vue'
+// import CISFormEmpty from './components/CISFormEmpty.vue'
 import CISBrands from './components/CISBrands.vue'
 import CISBrandsEmpty from './components/CISBrandsEmpty.vue'
 import CISBodies from './components/CISBodies.vue'
@@ -19,7 +19,7 @@ import CISBodies from './components/CISBodies.vue'
 export default {
     name: 'App',
     components: {
-        CISForm, CISFormEmpty,
+        CISForm, 
         CISBrands, CISBrandsEmpty,
         CISBodies
     },

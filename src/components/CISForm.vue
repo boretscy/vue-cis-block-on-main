@@ -84,6 +84,7 @@
                                         :max="rangeMax"
                                         :interval="rangeInterval"
                                         tooltip="none"
+                                        @drag-end="rangeEnd"
                                         ></vue-slider>
                                 </section>
                             </div>
@@ -119,14 +120,13 @@ export default {
     },
     data: function() {
         return {
-            rangeValue: [0, 0],
+            rangeValue: [0,99999999],
             rangeMin: 0,
-            rangeMax: 100000000,
-            brandIndx: [],
-            modelIndx: null,
-            totalCount: 0,
+            rangeMax: 99999999,
             rangeInterval: 1,
-            buttonLink: '/cars/new',
+
+            totalCount: 0,
+            buttonLink: '/',
 
             brandValue: [
             ],
@@ -136,7 +136,6 @@ export default {
             modelValue: [
             ],
             modelOptions: [
-                { name: 'Выберите марку', code: '' }
             ]
         }
     },
@@ -146,147 +145,150 @@ export default {
         response() {return this.$root.response}
     },
     watch: {
-        brandValue: function() {
+        brandValue: function(newValue) {
+            this.modelOptions = []
+            if ( newValue.length ) {
+                let url = 'https://apps.yug-avto.ru/API/get/cis/models/'+this.$root.link+'/?token='+this.$root.token+'&brand='
+                newValue.forEach( (i, indx) => {
+                    url += i.code
+                    if ( indx < newValue.length-1 ) url += ','  
+                })
+                this.axios.get(url).then((response) => {
+
+                    response.data.forEach( (i) => {
+                        this.modelOptions.push(
+                            { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.vehicles }
+                        )
+                    })
+                })
+            }
+            if ( newValue.length ) this.buildRange('brandValue')
+            if ( !newValue.length ) this.buildRange('brandOptions')
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
-            this.modelOptions = this.buildModels()
-            this.buildRange()
+
         },
-        modelValue: function() {
+        modelValue: function(newValue) {
             this.buttonLink = this.buildLink()
             this.totalCount = this.buildTotal()
-            this.buildRange()
+            if ( newValue.length ) this.buildRange('modelValue')
+            if ( !newValue.length ) this.buildRange('modelOptions')
         }
     },
 
     mounted: function() {
+        
+        let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
 
-        setTimeout(() => {
-            this.buildRange()
-            this.buildBrands() 
-            this.buttonLink = this.buildLink()
-            this.totalCount = this.buildTotal()
-
-        }, 500);
+		this.axios.get(url).then((response) => {
+            response.data.sort((a, b) => a.name > b.name ? 1 : -1);
+			this.$root.response = response.data
+            this.buildBrands().then( () => {
+                this.buildRange('brandOptions')
+                this.buttonLink = this.buildLink()
+                this.totalCount = this.buildTotal()
+            })
+           
+		}).then(() => {
+            
+        })
     },
 
     methods: {
 
         buildLink() {
 
-            let s = '/cars/'+this.link+'/#/filter?'
-            if ( this.brandValue.length) {
-                s += '&brand='
-                let b = []
-                this.brandValue.forEach( function(item) {
-                    b.push(item.code)
-                })
-                s += b.join(',')
-            }
-            if ( this.modelValue.length) {
-                s += '&model='
-                let m = []
-                this.modelValue.forEach( function(item) {
-                    m.push(item.code)
-                })
-                s += m.join(',')
-            }
-            s += '&minprice='+this.rangeValue[0]+'&maxprice='+this.rangeValue[1]
+            let l = '/cars/'+this.link+'/#', q = ''
 
-            return s
+            if ( this.brandValue.length == 1 ) l += '/'+this.brandValue[0].code
+            if ( this.brandValue.length == 1 && this.modelValue.length == 1 ) l += '/'+this.modelValue[0].code
+
+            if ( this.brandValue.length > 1 ) {
+                q += 'brand='
+                this.brandValue.forEach( (i, indx) => {
+                    q += i.code
+                    if ( indx < this.brandValue.length-1 ) q += ','
+                })
+            }
+            if ( (this.brandValue.length > 1 && this.modelValue.length ) ) {
+                q += '&model='
+                this.modelValue.forEach( (i, indx) => {
+                    q += i.code
+                    if ( indx < this.modelValue.length-1 ) q += ','
+                })
+            }
+            if ( this.rangeValue[0] != 0 || this.rangeValue[1] != 99999999 ) {
+                q += '&minprice='+this.rangeValue[0]
+                q += '&maxprice='+this.rangeValue[1]
+            }
+
+            return l + ((q.length)?'?':'') + q
         },
         buildBrands() {
 
-            let s = this.brandOptions
-            for (let i in this.$root.response ) {
-                s.push(
-                    { name: this.$root.response[i].name, code: this.$root.response[i].alias }
-                )
-            }
-        },
-        buildModels() {
-
-            this.modelValue = []
-            let b = this.brandValue, res = []
-            if ( b.length ) {
-                let s = this.$root.response
-                for (let i in s ) {
-                    b.forEach( function(item) {
-                        if ( s[i].alias == item.code ) {
-                            for ( let k in s[i].models ) {
-                                res.push({ name: s[i].models[k].name, code: s[i].models[k].alias })
-                            }
-                        }
-                    })
-                }
-            }
-            return res
+            return new Promise((resolve) => {
+                this.$root.response.forEach( (i) => {
+                this.brandOptions.push(
+                        { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.vehicles }
+                    )
+                })
+                resolve(true)
+            })
         },
         buildTotal() {
             
             let res = 0
-            if ( this.brandValue.length ) {
-                let s = this.$root.response
-                for ( let ib in s ) {
-                    this.brandValue.forEach( function(tagitem) {
-                        if (s[ib].alias == tagitem.code) res += Number(s[ib].vehicles)
+            if ( this.modelOptions.length ) {
+                if ( this.modelValue.length ) {
+                    this.modelValue.forEach( (i) => {
+                        res += i.vehicles
+                    })
+                } else {
+                    this.modelOptions.forEach( (i) => {
+                        res += i.vehicles
                     })
                 }
             } else {
-                for ( let ib in this.$root.response ) { res += Number(this.$root.response[ib].vehicles) }
+                if ( this.brandValue.length ) {
+                    this.brandValue.forEach( (i) => {
+                        res += i.vehicles
+                    })
+                } else {
+                    this.brandOptions.forEach( (i) => {
+                        res += i.vehicles
+                    })
+                }
             }
 
             return res
         },
-
-
-
-        buildRange() {
-            let min = 100000000, max = 0, b = this.brandValue, m = this.modelValue, s = this.$root.response
-            for ( let ib in s ) {
-                for ( let im in s[ib].models ) {
-                    if (b.length) {
-                        if (m.length) {
-                            b.forEach( function(bitem) {
-                                m.forEach( function(mitem) {
-                                    if ( s[ib].alias == bitem.code && s[ib].models[im].alias == mitem.code ) {
-                                        if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
-                                        if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
-                                    }
-                                })
-                            })
-                        } else {
-                            b.forEach( function(bitem) {
-                                if (s[ib].alias == bitem.code) {
-                                    if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
-                                    if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
-                                }
-                            })
-                        }
-                    } else {
-                        if (s[ib].models[im].minPrice < min) min = s[ib].models[im].minPrice
-                        if (s[ib].models[im].maxPrice > max) max = s[ib].models[im].maxPrice
-                    }
-                }
-            }
+        
+        resetRange() {
+            this.rangeMin = 0
+            this.rangeMax = 99999999
+            this.rangeValue = [0, 99999999]
+        },
+        rangeEnd() {
+            this.buttonLink = this.buildLink()
+        },
+        buildRange(from = 'brandOptions') {
+            this.resetRange()
             
-            if ( min > max ) {
-                let r = min
-                min = max
-                max = r
+            let min = 99999999, max = 0
+            this[from].forEach( (i) => {
+                if ( i.min < min ) min = i.min
+                if ( i.max > max ) max = i.max
+            })
 
-            }
-                 
+            this.rangeValue = [min, max]
             this.rangeMin = min
             this.rangeMax = max
-            this.rangeValue = [min, max]
         },
 
-        getBrands( q ) {
-
-            this.$root.link = q
+        getBrands(v) {
+            this.$root.link = v
+            this.buttonLink = this.buildLink()
         },
-
 
         Format(q) {
 			

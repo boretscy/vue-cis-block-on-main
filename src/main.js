@@ -14,7 +14,8 @@ new Vue({
             bodies: window.CISBodies,
             response: null,
             link: 'new',
-            token: '34b5ac8b71018c0bc7e5c050ed90b243'
+            token: '34b5ac8b71018c0bc7e5c050ed90b243',
+            apiUrl: 'https://apps.yug-avto.ru/API/get/cis/'
         }
     }
 }).$mount('#CISMAinBlock')

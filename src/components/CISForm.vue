@@ -89,7 +89,8 @@
                                 </section>
                             </div>
                             <div 
-                                class="bg-yawhite b-yagray b-radius-small py-4"
+                                class="bg-yawhite b-yagray b-radius-small"
+                                style="height: 45px;"
                                 v-else></div>
                         </div>
                         <div class="col-md-6 col-xl-3 mb-3">
@@ -290,6 +291,29 @@ export default {
         },
         rangeEnd() {
             this.buttonLink = this.buildLink()
+
+            let url = this.$root.apiUrl+'filter/'+this.$root.link+'/?'
+            let s = []
+            if ( this.brandValue.length ) {
+                this.brandValue.forEach( (i) => {
+                    s.push(i.alias)
+                })
+                url += '?brand='+s.join(',')
+            }
+            s = []
+            if ( this.modelValue.length ) {
+                this.modelValue.forEach( (i) => {
+                    s.push(i.alias)
+                })
+                url += '&model='+s.join(',')
+            }
+            url += '&minprice='+this.rangeValue[0]
+            url += '&maxprice='+this.rangeValue[1]
+            url += '&token='+this.$root.token
+
+            this.axios.get(url).then((response) => {
+                this.totalCount = response.data.totalCount
+            })
         },
         buildRange(from = 'brandOptions') {
             this.resetRange()

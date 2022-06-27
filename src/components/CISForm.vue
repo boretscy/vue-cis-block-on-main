@@ -12,7 +12,7 @@
                                         href="#" 
                                         class="text-uppercase c-yablack c-h-yablue text-decoration-none letter-spacing-plus fw-bold"
                                         :class="{'c-yablue': link =='new' }"
-                                        @click.prevent="getBrands('new')"
+                                        @click.prevent="setLink('new')"
                                         >Новые</a>
                                 </li>
                                 <li class="list-inline-item ms-3">
@@ -20,7 +20,7 @@
                                         href="#" 
                                         class="text-uppercase c-yablack c-h-yablue text-decoration-none letter-spacing-plus fw-bold"
                                         :class="{'c-yablue': link =='used' }"
-                                        @click.prevent="getBrands('used')"
+                                        @click.prevent="setLink('used')"
                                         >С пробегом</a>
                                 </li>
                             </ul>
@@ -136,7 +136,7 @@ export default {
             modelValue: [
             ],
             modelOptions: [
-            ]
+            ],
         }
     },
     computed: {
@@ -154,10 +154,10 @@ export default {
                     if ( indx < newValue.length-1 ) url += ','  
                 })
                 this.axios.get(url).then((response) => {
-
+                    
                     response.data.forEach( (i) => {
                         this.modelOptions.push(
-                            { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.vehicles }
+                            { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.statistics[1].counter + i.statistics[2].counter }
                         )
                     })
                 })
@@ -173,16 +173,35 @@ export default {
             this.totalCount = this.buildTotal()
             if ( newValue.length ) this.buildRange('modelValue')
             if ( !newValue.length ) this.buildRange('modelOptions')
+        },
+        '$root.link': function(v) {
+            this.$root.response = null
+            let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+v+'/?token='+this.$root.token
+            this.axios.get(url).then((response) => {
+                response.data.sort((a, b) => a.name > b.name ? 1 : -1);
+                this.$root.response = response.data
+                this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
+                this.buildBrands().then( () => {
+                    this.buildRange('brandOptions')
+                    this.buttonLink = this.buildLink()
+                    this.totalCount = this.buildTotal()
+                })
+            
+            }).then(() => {
+                
+            })
         }
     },
 
     mounted: function() {
         
+
         let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
 
 		this.axios.get(url).then((response) => {
             response.data.sort((a, b) => a.name > b.name ? 1 : -1);
 			this.$root.response = response.data
+            this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
             this.buildBrands().then( () => {
                 this.buildRange('brandOptions')
                 this.buttonLink = this.buildLink()
@@ -227,6 +246,7 @@ export default {
         buildBrands() {
 
             return new Promise((resolve) => {
+                this.brandOptions = []
                 this.$root.response.forEach( (i) => {
                 this.brandOptions.push(
                         { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.vehicles }
@@ -285,7 +305,7 @@ export default {
             this.rangeMax = max
         },
 
-        getBrands(v) {
+        setLink(v) {
             this.$root.link = v
             this.buttonLink = this.buildLink()
         },

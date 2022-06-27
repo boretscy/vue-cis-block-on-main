@@ -20,15 +20,15 @@
             >
             <div 
                 class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"
-                v-for="item in brands"
-                :key="item.id"
+                v-for="n in brandsCount"
+                :key="n"
                 >
                 <a 
-                    :href="'/cars/'+link+'/#/'+item.alias" 
+                    :href="'/cars/'+link+'/#/'+brands[n-1].alias" 
                     class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-3 ps-3 d-flex align-items-center justify-content-between"
                     >
-                    {{ item.name }}
-                    <span class="p-1 b-radius-small bg-yalightgray c-yalightblack bg-h-yayellow text-center">{{ item.vehicles }}</span>
+                    {{ brands[n-1].name }}
+                    <span class="p-1 b-radius-small bg-yalightgray c-yalightblack bg-h-yayellow text-center">{{ brands[n-1].vehicles }}</span>
                 </a>
             </div>
         </div>
@@ -41,7 +41,12 @@ export default {
     name: 'CISBrands',
     computed: {
         link() {return this.$root.link},
-        brands() {return this.$root.response}
+        brands() {return this.$root.response},
+        brandsCount() {
+            let res = 18
+            if ( this.$root.response.length < res ) res = this.$root.response.length
+            return res
+        }
     }
 }
 </script>

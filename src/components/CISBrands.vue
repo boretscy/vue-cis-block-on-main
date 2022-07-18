@@ -24,7 +24,7 @@
                 :key="n"
                 >
                 <a 
-                    :href="'/cars/'+link+'/#/'+brands[n-1].alias" 
+                    :href="'/cars/'+link+'/#/'+brands[n-1].code" 
                     class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-3 ps-3 d-flex align-items-center justify-content-between"
                     >
                     {{ brands[n-1].name }}

@@ -179,8 +179,7 @@ export default {
             this.$root.response = null
             let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+v+'/?token='+this.$root.token
             this.axios.get(url).then((response) => {
-                response.data.sort((a, b) => a.name > b.name ? 1 : -1);
-                this.$root.response = response.data
+                this.$root.response = response.data.dropLists.brands
                 this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
                 this.buildBrands().then( () => {
                     this.buildRange('brandOptions')
@@ -200,8 +199,8 @@ export default {
         let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
 
 		this.axios.get(url).then((response) => {
-            response.data.sort((a, b) => a.name > b.name ? 1 : -1);
-			this.$root.response = response.data
+            
+			this.$root.response = response.data.dropLists.brands
             this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
             this.buildBrands().then( () => {
                 this.buildRange('brandOptions')
@@ -249,9 +248,7 @@ export default {
             return new Promise((resolve) => {
                 this.brandOptions = []
                 this.$root.response.forEach( (i) => {
-                this.brandOptions.push(
-                        { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.vehicles }
-                    )
+                this.brandOptions.push(i)
                 })
                 resolve(true)
             })

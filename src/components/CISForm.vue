@@ -175,45 +175,45 @@ export default {
             if ( newValue.length ) this.buildRange('modelValue')
             if ( !newValue.length ) this.buildRange('modelOptions')
         },
-        '$root.link': function(v) {
-            this.$root.response = null
-            let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+v+'/?token='+this.$root.token
+        '$root.link': function() {
+            this.getBrands()
+        }
+    },
+
+    mounted: function() {
+
+        this.getBrands()
+        setInterval(() => {
+            
+            if ( localStorage.getItem('YAPP_SELECTED_CITY') != this.$root.city ) {
+                this.$root.city = localStorage.getItem('YAPP_SELECTED_CITY')
+                this.getBrands()
+            }
+            
+        }, 500);
+    },
+
+    methods: {
+
+        getBrands() {
+
+            let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
+            if ( this.$root.city ) url += '&city='+this.$root.city
+
             this.axios.get(url).then((response) => {
+                
                 this.$root.response = response.data.dropLists.brands
                 this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
+                this.$root.inCity = response.data.in_city
+                console.log(this.$root.inCity)
                 this.buildBrands().then( () => {
                     this.buildRange('brandOptions')
                     this.buttonLink = this.buildLink()
                     this.totalCount = this.buildTotal()
                 })
             
-            }).then(() => {
-                
             })
-        }
-    },
-
-    mounted: function() {
-        
-
-        let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
-
-		this.axios.get(url).then((response) => {
-            
-			this.$root.response = response.data.dropLists.brands
-            this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
-            this.buildBrands().then( () => {
-                this.buildRange('brandOptions')
-                this.buttonLink = this.buildLink()
-                this.totalCount = this.buildTotal()
-            })
-           
-		}).then(() => {
-            
-        })
-    },
-
-    methods: {
+        },
 
         buildLink() {
 

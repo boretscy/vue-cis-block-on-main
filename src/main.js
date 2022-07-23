@@ -15,7 +15,9 @@ new Vue({
             response: null,
             link: 'new',
             token: '34b5ac8b71018c0bc7e5c050ed90b243',
-            apiUrl: 'https://apps.yug-avto.ru/API/get/cis/'
+            apiUrl: 'https://apps.yug-avto.ru/API/get/cis/',
+            city: localStorage.getItem('YAPP_SELECTED_CITY') || null,
+            inCity: null
         }
     }
 }).$mount('#CISMAinBlock')

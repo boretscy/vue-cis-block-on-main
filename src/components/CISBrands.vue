@@ -2,7 +2,7 @@
     <div>
         <div class="row my-5 cis-filter-on-main-brands">
             <div class="col-6">
-                <h3 class="fw-normal">Автомобили в наличии <span v-if="$root.inCity">в {{ $root.inCity }}</span></h3>
+                <h3 class="fw-normal">Автомобили в наличии <a :href="'/dealerships/?city='+$root.city" v-if="$root.inCity" role="top-menu-show-list-city">в {{ $root.inCity }}</a></h3>
             </div>
             <div class="col-6 text-end pt-2">
                 <a 

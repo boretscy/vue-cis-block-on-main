@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row my-5 cis-filter-on-main-bodies">
+        <div class="row mt-5 mb-3 cis-filter-on-main-bodies">
             <div class="col-6">
                 <h3 class="fw-normal">Найти по типу кузова</h3>
             </div>

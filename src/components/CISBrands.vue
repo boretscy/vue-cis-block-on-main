@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row my-5 cis-filter-on-main-brands">
+        <div class="row mt-5 mb-3 cis-filter-on-main-brands">
             <div class="col-6">
                 <h3 class="fw-normal">Автомобили в наличии <a :href="'/dealerships/?city='+$root.city" v-if="$root.inCity" role="top-menu-show-list-city">в {{ $root.inCity }}</a></h3>
             </div>

@@ -25,7 +25,7 @@
                 >
                 <a 
                     :href="'/cars/'+link+'/#/'+brands[n-1].code" 
-                    class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-3 ps-3 d-flex align-items-center justify-content-between"
+                    class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-1 ps-3 d-flex align-items-center justify-content-between"
                     >
                     {{ brands[n-1].name }}
                     <span class="p-1 b-radius-small bg-yalightgray c-yalightblack bg-h-yayellow text-center">{{ brands[n-1].vehicles }}</span>

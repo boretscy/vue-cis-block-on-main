@@ -237,8 +237,7 @@ export default {
                 })
             }
             if ( this.rangeValue[0] != 0 || this.rangeValue[1] != 99999999 ) {
-                q += '&minprice='+this.rangeValue[0]
-                q += '&maxprice='+this.rangeValue[1]
+                q += '&price='+this.rangeValue.join(',')
             }
 
             return l + ((q.length)?'?':'') + q

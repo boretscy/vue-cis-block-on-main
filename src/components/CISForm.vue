@@ -148,6 +148,7 @@ export default {
     watch: {
         brandValue: function(newValue) {
             this.modelOptions = []
+            this.modelValue = []
             if ( newValue.length ) {
                 let url = 'https://apps.yug-avto.ru/API/get/cis/models/'+this.$root.link+'/?token='+this.$root.token+'&brand='
                 newValue.forEach( (i, indx) => {
@@ -158,7 +159,7 @@ export default {
                     
                     response.data.forEach( (i) => {
                         this.modelOptions.push(
-                            { name: i.name, code: i.alias, min: i.min, max: i.max, vehicles: i.statistics[1].counter + i.statistics[2].counter }
+                            { name: i.name, code: i.code, min: i.min, max: i.max, vehicles: i.vehicles }
                         )
                     })
                 })
@@ -312,17 +313,23 @@ export default {
             })
         },
         buildRange(from = 'brandOptions') {
-            this.resetRange()
-            
-            let min = 99999999, max = 0
-            this[from].forEach( (i) => {
-                if ( i.min < min ) min = i.min
-                if ( i.max > max ) max = i.max
-            })
+            if ( this[from].length > 0 ) {
 
-            this.rangeValue = [min, max]
-            this.rangeMin = min
-            this.rangeMax = max
+                this.rangeMin = 0
+                this.rangeMax = 99999999
+                this.rangeValue = [0, 99999999]
+                
+                let min = 99999999, max = 0
+                this[from].forEach( (i) => {
+                    if ( i.min < min ) min = Number(i.min)
+                    if ( i.max > max ) max = Number(i.max)
+                })
+
+                this.rangeValue = [min, max]
+                this.rangeMin = min
+                this.rangeMax = max
+            }
+            
         },
 
         setLink(v) {

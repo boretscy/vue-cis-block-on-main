@@ -15,7 +15,7 @@
             <a 
                 v-for="item in bodies"
                 :key="item.ID"
-                :href="'/cars/new/#/?body='+item.CODE" 
+                :href="'/cars/new/?body='+item.CODE" 
                 class="col-6 col-md-4 col-lg mb-3 mb-lg-0 cis-filter-on-main-bodies-item text-center text-decoration-none c-yadarkgray c-h-yablack"
                 >
                 <div class="cis-filter-on-main-bodies-item-icon">

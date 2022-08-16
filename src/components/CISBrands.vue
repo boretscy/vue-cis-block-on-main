@@ -19,7 +19,7 @@
             v-if="brands"
             >
             <div 
-                class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item ps-0"
+                class="col-6 col-md-3 col-lg-2 cis-filter-on-main-brands-item"
                 v-for="n in brandsCount"
                 :key="n"
                 >

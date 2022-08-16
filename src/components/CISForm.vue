@@ -68,7 +68,7 @@
                         <div class="col-md-6 col-xl-3 mb-3">
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
-                                v-if="response">
+                                v-if="brands">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start">
                                         {{ Format(rangeValue[0]) }} ₽
@@ -131,8 +131,6 @@ export default {
 
             brandValue: [
             ],
-            brandOptions: [
-            ],
 
             modelValue: [
             ],
@@ -143,25 +141,23 @@ export default {
     computed: {
 
         link() {return this.$root.link},
-        response() {return this.$root.response}
+        brands() {return this.$root.brands},
+        brandOptions() {return this.$root.brands}
     },
     watch: {
         brandValue: function(newValue) {
             this.modelOptions = []
             this.modelValue = []
             if ( newValue.length ) {
-                let url = 'https://apps.yug-avto.ru/API/get/cis/models/'+this.$root.link+'/?token='+this.$root.token+'&brand='
+                let url = 'https://apps.yug-avto.ru/API/get/cis/models/'+this.$root.link+'/?token='+this.$root.token
+                if ( this.$root.city ) url += '&city='+this.$root.city
+                url += '&brand='
                 newValue.forEach( (i, indx) => {
                     url += i.code
                     if ( indx < newValue.length-1 ) url += ','  
                 })
                 this.axios.get(url).then((response) => {
-                    
-                    response.data.forEach( (i) => {
-                        this.modelOptions.push(
-                            { name: i.name, code: i.code, min: i.min, max: i.max, vehicles: i.vehicles }
-                        )
-                    })
+                    this.modelOptions = response.data
                 })
             }
             if ( newValue.length ) this.buildRange('brandValue')
@@ -177,18 +173,27 @@ export default {
             if ( !newValue.length ) this.buildRange('modelOptions')
         },
         '$root.link': function() {
-            this.getBrands()
+            this.$parent.getBrands()
+        },
+        '$root.brands' : function() {
+            this.buildRange('brandOptions')
+            this.buttonLink = this.buildLink()
+            this.totalCount = this.buildTotal()
         }
     },
 
     mounted: function() {
 
-        this.getBrands()
+
+        this.buildRange('brandOptions')
+        this.buttonLink = this.buildLink()
+        this.totalCount = this.buildTotal()
+
         setInterval(() => {
             
             if ( localStorage.getItem('YAPP_SELECTED_CITY') != this.$root.city ) {
                 this.$root.city = localStorage.getItem('YAPP_SELECTED_CITY')
-                this.getBrands()
+                this.$parent.getBrands()
             }
             
         }, 500);
@@ -196,29 +201,9 @@ export default {
 
     methods: {
 
-        getBrands() {
-
-            let url = 'https://apps.yug-avto.ru/API/get/cis/brands/'+this.$root.link+'/?token='+this.$root.token
-            if ( this.$root.city ) url += '&city='+this.$root.city
-
-            this.axios.get(url).then((response) => {
-                
-                this.$root.response = response.data.dropLists.brands
-                this.$root.response.sort((a, b) => a.vehicles < b.vehicles ? 1 : -1)
-                this.$root.inCity = response.data.in_city
-                console.log(this.$root.inCity)
-                this.buildBrands().then( () => {
-                    this.buildRange('brandOptions')
-                    this.buttonLink = this.buildLink()
-                    this.totalCount = this.buildTotal()
-                })
-            
-            })
-        },
-
         buildLink() {
 
-            let l = '/cars/'+this.link+'/#', q = ''
+            let l = '/cars/'+this.link, q = ''
 
             if ( this.brandValue.length == 1 ) l += '/'+this.brandValue[0].code
             if ( this.brandValue.length == 1 && this.modelValue.length == 1 ) l += '/'+this.modelValue[0].code
@@ -242,16 +227,6 @@ export default {
             }
 
             return l + ((q.length)?'?':'') + q
-        },
-        buildBrands() {
-
-            return new Promise((resolve) => {
-                this.brandOptions = []
-                this.$root.response.forEach( (i) => {
-                this.brandOptions.push(i)
-                })
-                resolve(true)
-            })
         },
         buildTotal() {
             
@@ -293,19 +268,18 @@ export default {
             let s = []
             if ( this.brandValue.length ) {
                 this.brandValue.forEach( (i) => {
-                    s.push(i.alias)
+                    s.push(i.code)
                 })
-                url += '?brand='+s.join(',')
+                url += 'brand='+s.join(',')
             }
             s = []
             if ( this.modelValue.length ) {
                 this.modelValue.forEach( (i) => {
-                    s.push(i.alias)
+                    s.push(i.code)
                 })
                 url += '&model='+s.join(',')
             }
-            url += '&minprice='+this.rangeValue[0]
-            url += '&maxprice='+this.rangeValue[1]
+            url += '&price='+this.rangeValue.join(',')
             url += '&token='+this.$root.token
 
             this.axios.get(url).then((response) => {

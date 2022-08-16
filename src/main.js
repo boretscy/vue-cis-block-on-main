@@ -11,8 +11,8 @@ new Vue({
     render: h => h(App),
     data() {
         return {
-            bodies: window.CISBodies,
-            response: null,
+            bodies: null,
+            brands: [],
             link: 'new',
             token: '34b5ac8b71018c0bc7e5c050ed90b243',
             apiUrl: 'https://apps.yug-avto.ru/API/get/cis/',

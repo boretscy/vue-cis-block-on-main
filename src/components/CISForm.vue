@@ -281,6 +281,7 @@ export default {
             }
             url += '&price='+this.rangeValue.join(',')
             url += '&token='+this.$root.token
+            if ( this.$root.city ) url += '&city='+this.$root.city
 
             this.axios.get(url).then((response) => {
                 this.totalCount = response.data.totalCount

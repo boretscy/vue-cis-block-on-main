@@ -4,7 +4,7 @@
             <div class="col">
                 <form class="bg-yayellow b-radius-small p-5 m-0">
                     <div class="row mb-3">
-                        <div class="col-6"><h3 class="fw-normal">Найти автомобиль</h3></div>
+                        <div class="col-6 h3 fw-normal">Найти автомобиль</div>
                         <div class="col-6 text-end">
                             <ul class="list-inline text-minus pt-2">
                                 <li class="list-inline-item ms-3">

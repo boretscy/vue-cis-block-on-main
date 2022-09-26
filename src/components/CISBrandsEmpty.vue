@@ -2,7 +2,7 @@
     <div>
         <div class="row my-5 cis-filter-on-main-brands">
             <div class="col-6">
-                <h3 class="fw-normal">Автомобили в наличии</h3>
+                <h1 class="h3 fw-normal">Автомобили в наличии</h1>
             </div>
             <div class="col-6 text-end pt-2">
                 <a 

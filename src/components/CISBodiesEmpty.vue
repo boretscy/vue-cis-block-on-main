@@ -2,7 +2,7 @@
     <div class="container my-5">
         <div class="row mt-5 mb-3 cis-filter-on-main-bodies">
             <div class="col-6">
-                <h3 class="fw-normal">Найти по типу кузова</h3>
+                <h2 class="h3 fw-normal">Найти по типу кузова</h2>
             </div>
             <div class="col-6 text-end pt-2">
                 <a href="/cars/new" class="c-yablack c-h-yablack text-decoration-none">

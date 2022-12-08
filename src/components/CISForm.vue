@@ -7,21 +7,16 @@
                         <div class="col-6 h3 fw-normal">Найти автомобиль</div>
                         <div class="col-6 text-end">
                             <ul class="list-inline text-minus pt-2">
-                                <li class="list-inline-item ms-3">
+                                <li 
+                                    class="list-inline-item ms-3"
+                                    v-for="(item, indx) in $root.settings.items"
+                                    :key="indx">
                                     <a 
                                         href="#" 
                                         class="text-uppercase c-yablack c-h-yablue text-decoration-none letter-spacing-plus fw-bold"
-                                        :class="{'c-yablue': link =='new' }"
-                                        @click.prevent="setLink('new')"
-                                        >Новые</a>
-                                </li>
-                                <li class="list-inline-item ms-3">
-                                    <a 
-                                        href="#" 
-                                        class="text-uppercase c-yablack c-h-yablue text-decoration-none letter-spacing-plus fw-bold"
-                                        :class="{'c-yablue': link =='used' }"
-                                        @click.prevent="setLink('used')"
-                                        >С пробегом</a>
+                                        :class="{'c-yablue': $root.itemIndx == indx }"
+                                        @click.prevent="$root.itemIndx = indx"
+                                        >{{ item.name }}</a>
                                 </li>
                             </ul>
                         </div>
@@ -68,21 +63,25 @@
                         <div class="col-md-6 col-xl-3 mb-3">
                             <div 
                                 class="bg-yawhite b-yagray b-radius-small position-relative"
-                                v-if="brands">
+                                v-if="brandOptions">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
-                                    <div class="col-6 text-start">
-                                        {{ Format(rangeValue[0]) }} ₽
+                                    <div class="col-6 text-start position-relative input-range">
+                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <span class="name">Цена от</span>
+                                        <span class="rubble">₽</span>
                                     </div>
-                                    <div class="col-6 text-end">
-                                        {{ Format(rangeValue[1]) }} ₽
+                                    <div class="col-6 text-end position-relative input-range">
+                                        <input type="text" v-model="maxVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <span class="name">до</span>
+                                        <span class="rubble">₽</span>
                                     </div>
                                 </div>
                                 <section class="cis-filter-on-main-range-slider">
                                     <vue-slider 
-                                        v-model="rangeValue"
-                                        :min="rangeMin"
-                                        :max="rangeMax"
-                                        :interval="rangeInterval"
+                                        v-model="$root.price.value"
+                                        :min="$root.price.range[0]"
+                                        :max="$root.price.range[1]"
+                                        :interval="1"
                                         tooltip="none"
                                         @drag-end="rangeEnd"
                                         ></vue-slider>
@@ -97,8 +96,9 @@
                             <a 
                                 :href="buttonLink" 
                                 class="d-block text-center c-yawhite c-h-yawhite bg-h-yablue bg-yadarkblue text-decoration-none b-radius-small but-lg"
+                                :class="{'disabled': !activeButton}"
                                 style="padding: 10px;"
-                                >Показать {{ Format(totalCount) }} авто</a>
+                                > {{ (activeButton) ? 'Показать '+String(totalCount).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+' авто' : defaultButtonText }} </a>
                         </div>
                     </div>
                 </form>
@@ -121,10 +121,6 @@ export default {
     },
     data: function() {
         return {
-            rangeValue: [0,99999999],
-            rangeMin: 0,
-            rangeMax: 99999999,
-            rangeInterval: 1,
 
             totalCount: 0,
             buttonLink: '/',
@@ -134,100 +130,151 @@ export default {
 
             modelValue: [
             ],
-            modelOptions: [
-            ],
+
+            activeButton: true,
+            defaultButtonText: 'Ожидайте'
         }
     },
     computed: {
 
-        link() {return this.$root.link},
-        brands() {return this.$root.brands},
-        brandOptions() {return this.$root.brands}
+        brandOptions() {return this.$root.brands},
+        modelOptions() {return this.$root.models},
+
+        minVal: {
+            get() {
+                console.log('get', this.$root.price.value[0])
+                this.$root.price.value[0]
+                return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            },  
+            set(v) {
+                let dv = Number(v.replace(/[^\d;]/g, ''))
+                if ( dv > this.$root.price.range[0] ) this.$root.price.value[0] = dv
+                console.log('set', v, dv, this.$root.price.value[0])
+                console.log('set minVal',this.minVal)
+            }
+        },
+        maxVal: {
+            get() {
+                return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            },  
+            set(v) {
+                let dv = Number(v.replace(/[^\d;]/g, ''))
+                if ( dv > this.$root.price.range[0] ) this.$root.price.value[1] = dv
+            }
+        }
     },
     watch: {
         brandValue: function(newValue) {
-            this.modelOptions = []
+            this.$root.models = []
             this.modelValue = []
+            
             if ( newValue.length ) {
-                let url = 'https://apps.yug-avto.ru/API/get/cis/models/'+this.$root.link+'/?token='+this.$root.token
-                if ( this.$root.city ) url += '&city='+this.$root.city
-                url += '&brand='
-                newValue.forEach( (i, indx) => {
-                    url += i.code
-                    if ( indx < newValue.length-1 ) url += ','  
-                })
+
+                let url = this.$root.apiUrl + 'models'+ '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
+                let get = this.builGetParams()
+                get.push('token='+this.$root.token)
+                if ( this.$root.city ) get.push('city='+this.$root.city)
+                url += '?' + get.join('&')
+
                 this.axios.get(url).then((response) => {
-                    this.modelOptions = response.data
+                    this.$root.models = response.data
                 })
             }
-            if ( newValue.length ) this.buildRange('brandValue')
-            if ( !newValue.length ) this.buildRange('brandOptions')
-            this.buttonLink = this.buildLink()
-            this.totalCount = this.buildTotal()
+
+            let rangeSource = ( newValue.length ) ? 'brandValue' : 'brandOptions' 
+            this.set(rangeSource)
 
         },
         modelValue: function(newValue) {
-            this.buttonLink = this.buildLink()
-            this.totalCount = this.buildTotal()
-            if ( newValue.length ) this.buildRange('modelValue')
-            if ( !newValue.length ) this.buildRange('modelOptions')
+            let rangeSource = ( newValue.length ) ? 'modelValue' : 'modelOptions' 
+            this.set(rangeSource)
         },
-        '$root.link': function() {
+        '$root.itemIndx': function() {
             this.$parent.getBrands()
         },
         '$root.brands' : function() {
-            this.buildRange('brandOptions')
-            this.buttonLink = this.buildLink()
-            this.totalCount = this.buildTotal()
+            this.set()
         }
     },
 
     mounted: function() {
-
-
-        this.buildRange('brandOptions')
-        this.buttonLink = this.buildLink()
-        this.totalCount = this.buildTotal()
-
-        setInterval(() => {
-            
-            if ( localStorage.getItem('YAPP_SELECTED_CITY') != this.$root.city ) {
-                this.$root.city = localStorage.getItem('YAPP_SELECTED_CITY')
-                this.$parent.getBrands()
-            }
-            
-        }, 500);
+        this.init()
     },
 
     methods: {
 
+        init() {
+            this.set()
+            if (this.brandValue.length) this.brandValue = []
+        },
+        set(rangeSource = 'brandOptions') {
+            this.buildRange(rangeSource)
+            this.buttonLink = this.buildLink()
+            this.totalCount = this.buildTotal()
+        },
+
         buildLink() {
 
-            let l = '/cars/'+this.link, q = ''
+            let link = this.$root.settings.baseURL + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
+            let get = []
+            let params = []
 
-            if ( this.brandValue.length == 1 ) l += '/'+this.brandValue[0].code
-            if ( this.brandValue.length == 1 && this.modelValue.length == 1 ) l += '/'+this.modelValue[0].code
+            if ( this.brandValue.length == 1 ) link += this.brandValue[0].code
+            if ( this.brandValue.length == 1 && this.modelValue.length == 1 ) link += '/'+this.modelValue[0].code
 
+            params = []
             if ( this.brandValue.length > 1 ) {
-                q += 'brand='
-                this.brandValue.forEach( (i, indx) => {
-                    q += i.code
-                    if ( indx < this.brandValue.length-1 ) q += ','
-                })
-            }
-            if ( (this.brandValue.length > 1 && this.modelValue.length ) ) {
-                q += '&model='
-                this.modelValue.forEach( (i, indx) => {
-                    q += i.code
-                    if ( indx < this.modelValue.length-1 ) q += ','
-                })
-            }
-            if ( this.rangeValue[0] != 0 || this.rangeValue[1] != 99999999 ) {
-                q += '&price='+this.rangeValue.join(',')
+                this.brandValue.forEach( (i) => { params.push(i.code) })
+                get.push('brand='+params.join(','))
             }
 
-            return l + ((q.length)?'?':'') + q
+            params = []
+            if ( 
+                (this.brandValue.length == 1 && this.modelValue.length > 1) ||
+                (this.brandValue.length > 1 && this.modelValue.length )
+            ) {
+                this.modelValue.forEach( (i) => { params.push(i.code) })
+                get.push('model='+params.join(','))
+            }
+
+            if ( this.$root.price.value[0] != this.$root.price.range[0] || this.$root.price.value[1] != this.$root.price.range[1] ) {
+               get.push('price='+this.$root.price.value.join(','))
+            }
+
+            if ( this.$root.settings.items[this.$root.itemIndx].params ) {
+                for ( let i in this.$root.settings.items[this.$root.itemIndx].params ) {
+                    get.push(i+'='+this.$root.settings.items[this.$root.itemIndx].params[i])
+                }
+            }
+
+            if ( get.length ) {
+                link += '?'+get.join('&')
+            }
+
+            return link
         },
+
+        builGetParams() {
+
+            let res = [], params = []
+
+            if ( this.brandValue.length ) {
+                this.brandValue.forEach( (i) => { params.push(i.code) })
+                res.push('brand='+params.join(','))
+            }
+
+            if ( this.modelValue.length ) {
+                this.modelValue.forEach( (i) => { params.push(i.code) })
+                res.push('brand='+params.join(','))
+            }
+
+            if ( this.$root.price.value[0] != this.$root.price.range[0] || this.$root.price.value[1] != this.$root.price.range[1] ) {
+               res.push('price='+this.$root.price.value.join(','))
+            }
+
+            return res
+        },
+
         buildTotal() {
             
             let res = 0
@@ -255,67 +302,39 @@ export default {
 
             return res
         },
-        
-        resetRange() {
-            this.rangeMin = 0
-            this.rangeMax = 99999999
-            this.rangeValue = [0, 99999999]
-        },
+
         rangeEnd() {
-            this.buttonLink = this.buildLink()
+            
+            this.activeButton = false
 
-            let url = this.$root.apiUrl+'filter/'+this.$root.link+'/?'
-            let s = []
-            if ( this.brandValue.length ) {
-                this.brandValue.forEach( (i) => {
-                    s.push(i.code)
-                })
-                url += 'brand='+s.join(',')
-            }
-            s = []
-            if ( this.modelValue.length ) {
-                this.modelValue.forEach( (i) => {
-                    s.push(i.code)
-                })
-                url += '&model='+s.join(',')
-            }
-            url += '&price='+this.rangeValue.join(',')
-            url += '&token='+this.$root.token
-            if ( this.$root.city ) url += '&city='+this.$root.city
-
+            let url = this.$root.apiUrl + 'filter' + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
+            let get = this.builGetParams()
+            get.push('token='+this.$root.token)
+            if ( this.$root.city ) get.push('city='+this.$root.city)
+            url += '?' + get.join('&')
+            
             this.axios.get(url).then((response) => {
                 this.totalCount = response.data.totalCount
+            }).then( () => {
+                this.buttonLink = this.buildLink()
+                this.activeButton = true
             })
         },
-        buildRange(from = 'brandOptions') {
-            if ( this[from].length > 0 ) {
+        buildRange(rangeSource = 'brandOptions') {
+            if ( this[rangeSource].length > 0 ) {
 
-                this.rangeMin = 0
-                this.rangeMax = 99999999
-                this.rangeValue = [0, 99999999]
+                this.$root.price.range = [0, 99999999]
+                this.$root.price.value = [0, 99999999]
                 
                 let min = 99999999, max = 0
-                this[from].forEach( (i) => {
-                    if ( i.min < min ) min = Number(i.min)
-                    if ( i.max > max ) max = Number(i.max)
+                this[rangeSource].forEach( (i) => {
+                    if ( i.min < min ) min = i.min
+                    if ( i.max > max ) max = i.max
                 })
 
-                this.rangeValue = [min, max]
-                this.rangeMin = min
-                this.rangeMax = max
+                this.$root.price.value = [min, max]
+                this.$root.price.range = [min, max]
             }
-            
-        },
-
-        setLink(v) {
-            this.$root.link = v
-            this.buttonLink = this.buildLink()
-        },
-
-        Format(q) {
-			
-            var Price = new Intl.NumberFormat('ru', { currency: 'RUR' });
-            return Price.format(q);	
         }
     }
 }
@@ -333,6 +352,50 @@ export default {
 fieldset[disabled] .multiselect {
   pointer-events: none;
 }
+
+.input-range input {
+    border: none;
+    width: 100%;
+    padding-top: 7px;
+    outline: none;
+}
+.input-range:first-child input {
+    margin-left: 10px;
+    text-align: left;
+    position: relative;
+}
+.input-range:first-child::after {
+    content: '';
+    width: 1px;
+    height: 20px;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    background: var(--yagray);
+}
+.input-range:last-child input {
+    margin-right: 10px;
+    text-align: right;
+}
+.input-range span {
+    position: absolute;
+    color: var(--yagray);
+    top: -8px;
+    font-size: 12px;
+}
+.input-range span.name {
+    left: 5px;
+}
+.input-range span.rubble {
+    right: 5px;
+}
+
+.disabled {
+    opacity: .3;
+    cursor: progress;
+}
+
+
 .multiselect__spinner {
   position: absolute;
   right: 1px;

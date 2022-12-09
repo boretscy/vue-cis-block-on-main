@@ -66,24 +66,13 @@
                                 v-if="brandOptions">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start position-relative input-range">
-                                        <input 
-                                            type="text" 
-                                            v-model="minRange" 
-                                            @blur="rangeEnd" 
-                                            @keydown.enter.prevent="rangeEnd" 
-                                            v-if="viewInputRange.min" />
-                                        <div class="view-range" v-else @click.prevent="viewInputRange.min = true">{{ String(minRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
+                                        <input type="hidden" v-model="$root.price.value[0]">
+                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
                                         <span class="name">Цена от</span>
                                         <span class="rubble">₽</span>
                                     </div>
                                     <div class="col-6 text-end position-relative input-range">
-                                        <input 
-                                            type="text" 
-                                            v-model="maxRange" 
-                                            @blur="rangeEnd" 
-                                            @keydown.enter.prevent="rangeEnd" 
-                                            v-if="viewInputRange.max" />
-                                        <div class="view-range" v-else @click.prevent="viewInputRange.max = true">{{ String(maxRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
+                                        <input type="text" v-model="maxVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
                                         <span class="name">до</span>
                                         <span class="rubble">₽</span>
                                     </div>
@@ -96,7 +85,6 @@
                                         :interval="1"
                                         tooltip="none"
                                         @drag-end="rangeEnd"
-                                        :silent="true"
                                         ></vue-slider>
                                 </section>
                             </div>
@@ -111,7 +99,7 @@
                                 class="d-block text-center c-yawhite c-h-yawhite bg-h-yablue bg-yadarkblue text-decoration-none b-radius-small but-lg"
                                 :class="{'disabled': !activeButton}"
                                 style="padding: 10px;"
-                                > {{ (activeButton) ? 'Показать '+String(totalCount).replace(/\B(?=(\d{3})+(?!\d))/g, " ")+' авто' : defaultButtonText }} </a>
+                                > {{ (activeButton) ? 'Показать '+String(totalCount).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+' авто' : defaultButtonText }} </a>
                         </div>
                     </div>
                 </form>
@@ -134,26 +122,43 @@ export default {
     },
     data: function() {
         return {
+
             totalCount: 0,
             buttonLink: '/',
+
             brandValue: [
             ],
+
             modelValue: [
             ],
-            viewInputRange: {
-                min: false,
-                max: false,
-            },
-            minRange: 0,
-            maxRange: 99999999,
+
             activeButton: true,
             defaultButtonText: 'Ожидайте'
         }
     },
     computed: {
 
-        brandOptions() { return this.$root.brands },
-        modelOptions() { return this.$root.models }
+        brandOptions() {return this.$root.brands},
+        modelOptions() {return this.$root.models},
+
+        minVal: {
+            get() {
+                return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            },  
+            set(v) {
+                let dv = Number(v.replace(/[^\d;]/g, ''))
+                if ( dv > this.$root.price.range[0] ) this.$set(this.$root.price.value, 0, dv)
+            }
+        },
+        maxVal: {
+            get() {
+                return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+            },  
+            set(v) {
+                let dv = Number(v.replace(/[^\d;]/g, ''))
+                if ( dv > this.$root.price.range[0] ) this.$set(this.$root.price.value, 1, dv)
+            }
+        }
     },
     watch: {
         brandValue: function(newValue) {
@@ -186,14 +191,6 @@ export default {
         },
         '$root.brands' : function() {
             this.set()
-        },
-
-        minRange: function(v) {
-            this.minVal
-            if ( Number(v) > this.$root.price.range[0] ) this.$root.price.value[0] = Number(v)
-        },
-        maxRange: function(v) {
-            if ( Number(v) > Number(this.minRange) && Number(v) < this.$root.price.range[1] ) this.$root.price.value[1] = Number(v)
         }
     },
 
@@ -304,9 +301,6 @@ export default {
         },
 
         rangeEnd() {
-
-            this.viewInputRange.min = false
-            this.viewInputRange.max = false
             
             this.activeButton = false
 
@@ -322,6 +316,7 @@ export default {
                 this.buttonLink = this.buildLink()
                 this.activeButton = true
             })
+            this.minVal
         },
         buildRange(rangeSource = 'brandOptions') {
             if ( this[rangeSource].length > 0 ) {
@@ -337,9 +332,6 @@ export default {
 
                 this.$root.price.value = [min, max]
                 this.$root.price.range = [min, max]
-
-                this.minRange = min
-                this.maxRange = max
             }
         }
     }
@@ -359,14 +351,14 @@ fieldset[disabled] .multiselect {
   pointer-events: none;
 }
 
-.input-range input,  .input-range .view-range {
+.input-range input {
     border: none;
     width: 100%;
     padding-top: 7px;
     outline: none;
 }
-.input-range:first-child input, .input-range:first-child .view-range {
-    padding-left: 2px;
+.input-range:first-child input {
+    margin-left: 10px;
     text-align: left;
     position: relative;
 }
@@ -380,10 +372,6 @@ fieldset[disabled] .multiselect {
     background: var(--yagray);
 }
 .input-range:last-child input {
-    margin-right: 10px;
-    text-align: right;
-}
-.input-range:last-child input, .input-range:last-child .view-range {
     margin-right: 10px;
     text-align: right;
 }

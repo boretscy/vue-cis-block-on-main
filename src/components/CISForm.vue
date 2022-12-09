@@ -68,22 +68,22 @@
                                     <div class="col-6 text-start position-relative input-range">
                                         <input 
                                             type="text" 
-                                            v-model="$root.price.value[0]" 
+                                            v-model="minRange" 
                                             @blur="rangeEnd" 
                                             @keyup.enter="rangeEnd" 
                                             v-if="viewInputRange.min" />
-                                        <div class="view-range" v-else @click.prevent="viewInputRange.min = true">{{ minVal }}</div>
+                                        <div class="view-range" v-else @click.prevent="viewInputRange.min = true">{{ String(minRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
                                         <span class="name">Цена от</span>
                                         <span class="rubble">₽</span>
                                     </div>
                                     <div class="col-6 text-end position-relative input-range">
                                         <input 
                                             type="text" 
-                                            v-model="$root.price.value[1]" 
+                                            v-model="maxRange" 
                                             @blur="rangeEnd" 
                                             @keyup.enter="rangeEnd" 
                                             v-if="viewInputRange.max" />
-                                        <div class="view-range" v-else @click.prevent="viewInputRange.max = true">{{ maxVal }}</div>
+                                        <div class="view-range" v-else @click.prevent="viewInputRange.max = true">{{ String(maxRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
                                         <span class="name">до</span>
                                         <span class="rubble">₽</span>
                                     </div>
@@ -149,6 +149,9 @@ export default {
                 max: false,
             },
 
+            minRange: 0,
+            maxRange: 99999999,
+
             activeButton: true,
             defaultButtonText: 'Ожидайте'
         }
@@ -156,32 +159,7 @@ export default {
     computed: {
 
         brandOptions() { return this.$root.brands },
-        modelOptions() { return this.$root.models },
-        minVal() { return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ") },
-        maxVal() { return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ") },
-
-        // minVal: {
-        //     get() {
-        //         console.log('from get', this.$root.price.value[0])
-        //         return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-        //     },  
-        //     set(v) {
-        //         let dv = Number(v.replace(/[^\d;]/g, ''))
-        //         if ( dv > this.$root.price.range[0] ) this.$root.price.value[0] = dv
-        //         console.log('from set: v, dv, this.$root.price.value[0]', v, dv, this.$root.price.value[0])
-        //         console.log('set minVal', this.minVal)
-        //     }
-        // },
-        
-        // maxVal: {
-        //     get() {
-        //         return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-        //     },  
-        //     set(v) {
-        //         let dv = Number(v.replace(/[^\d;]/g, ''))
-        //         if ( dv > this.$root.price.range[0] ) this.$root.price.value[1] = dv
-        //     }
-        // }
+        modelOptions() { return this.$root.models }
     },
     watch: {
         brandValue: function(newValue) {
@@ -214,6 +192,14 @@ export default {
         },
         '$root.brands' : function() {
             this.set()
+        },
+
+        minRange: function(v) {
+            this.minVal
+            if ( Number(v) > this.$root.price.range[0] ) this.$root.price.value[0] = Number(v)
+        },
+        maxRange: function(v) {
+            if ( Number(v) > Number(this.minRange) && Number(v) < this.$root.price.range[1] ) this.$root.price.value[1] = Number(v)
         }
     },
 
@@ -358,6 +344,9 @@ export default {
 
                 this.$root.price.value = [min, max]
                 this.$root.price.range = [min, max]
+
+                this.minRange = min
+                this.maxRange = max
             }
         }
     }

@@ -5,9 +5,7 @@
                 <h2 class="h3 fw-normal">Найти по типу кузова</h2>
             </div>
             <div class="col-6 text-end pt-2">
-                <a 
-                    :href="'/cars/'+link+'/'"
-                    class="c-yablack c-h-yablack text-decoration-none">
+                <a href="/cars/new" class="c-yablack c-h-yablack text-decoration-none">
                     Все типы кузовов
                     <svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#corner-right"></use></svg>
                 </a>
@@ -103,8 +101,7 @@ export default {
         IconWagon, IconWagonback
     },
     computed: {
-        bodies() {return this.$root.bodies},
-        link() {return this.$root.link}
+        bodies() {return this.$root.bodies}
     }
 
 }

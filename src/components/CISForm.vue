@@ -70,7 +70,7 @@
                                             type="text" 
                                             v-model="minRange" 
                                             @blur="rangeEnd" 
-                                            @keyup.enter="rangeEnd" 
+                                            @keydown.enter.prevent="rangeEnd" 
                                             v-if="viewInputRange.min" />
                                         <div class="view-range" v-else @click.prevent="viewInputRange.min = true">{{ String(minRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
                                         <span class="name">Цена от</span>
@@ -81,7 +81,7 @@
                                             type="text" 
                                             v-model="maxRange" 
                                             @blur="rangeEnd" 
-                                            @keyup.enter="rangeEnd" 
+                                            @keydown.enter.prevent="rangeEnd" 
                                             v-if="viewInputRange.max" />
                                         <div class="view-range" v-else @click.prevent="viewInputRange.max = true">{{ String(maxRange).replace(/\B(?=(\d{3})+(?!\d))/g, " ") }}</div>
                                         <span class="name">до</span>
@@ -328,7 +328,6 @@ export default {
                 this.buttonLink = this.buildLink()
                 this.activeButton = true
             })
-            this.minVal
         },
         buildRange(rangeSource = 'brandOptions') {
             if ( this[rangeSource].length > 0 ) {

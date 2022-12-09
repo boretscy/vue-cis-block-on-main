@@ -66,12 +66,24 @@
                                 v-if="brandOptions">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start position-relative input-range">
-                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <input 
+                                            type="text" 
+                                            v-model="$root.price.value[0]" 
+                                            @blur="rangeEnd" 
+                                            @keyup.enter="rangeEnd" 
+                                            v-if="viewInputRange.min" />
+                                        <div class="view-range" v-else @click.prevent="viewInputRange.min = true">{{ minVal }}</div>
                                         <span class="name">Цена от</span>
                                         <span class="rubble">₽</span>
                                     </div>
                                     <div class="col-6 text-end position-relative input-range">
-                                        <input type="text" v-model="maxVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <input 
+                                            type="text" 
+                                            v-model="$root.price.value[1]" 
+                                            @blur="rangeEnd" 
+                                            @keyup.enter="rangeEnd" 
+                                            v-if="viewInputRange.max" />
+                                        <div class="view-range" v-else @click.prevent="viewInputRange.max = true">{{ maxVal }}</div>
                                         <span class="name">до</span>
                                         <span class="rubble">₽</span>
                                     </div>
@@ -84,6 +96,7 @@
                                         :interval="1"
                                         tooltip="none"
                                         @drag-end="rangeEnd"
+                                        :silent="true"
                                         ></vue-slider>
                                 </section>
                             </div>
@@ -98,7 +111,7 @@
                                 class="d-block text-center c-yawhite c-h-yawhite bg-h-yablue bg-yadarkblue text-decoration-none b-radius-small but-lg"
                                 :class="{'disabled': !activeButton}"
                                 style="padding: 10px;"
-                                > {{ (activeButton) ? 'Показать '+String(totalCount).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ')+' авто' : defaultButtonText }} </a>
+                                > {{ (activeButton) ? 'Показать '+String(totalCount).replace(/\B(?=(\d{3})+(?!\d))/g, " ")+' авто' : defaultButtonText }} </a>
                         </div>
                     </div>
                 </form>
@@ -131,37 +144,44 @@ export default {
             modelValue: [
             ],
 
+            viewInputRange: {
+                min: false,
+                max: false,
+            },
+
             activeButton: true,
             defaultButtonText: 'Ожидайте'
         }
     },
     computed: {
 
-        brandOptions() {return this.$root.brands},
-        modelOptions() {return this.$root.models},
+        brandOptions() { return this.$root.brands },
+        modelOptions() { return this.$root.models },
+        minVal() { return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ") },
+        maxVal() { return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ") },
 
-        minVal: {
-            get() {
-                console.log('get', this.$root.price.value[0])
-                this.$root.price.value[0]
-                return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-            },  
-            set(v) {
-                let dv = Number(v.replace(/[^\d;]/g, ''))
-                if ( dv > this.$root.price.range[0] ) this.$root.price.value[0] = dv
-                console.log('set', v, dv, this.$root.price.value[0])
-                console.log('set minVal',this.minVal)
-            }
-        },
-        maxVal: {
-            get() {
-                return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-            },  
-            set(v) {
-                let dv = Number(v.replace(/[^\d;]/g, ''))
-                if ( dv > this.$root.price.range[0] ) this.$root.price.value[1] = dv
-            }
-        }
+        // minVal: {
+        //     get() {
+        //         console.log('from get', this.$root.price.value[0])
+        //         return String(this.$root.price.value[0]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        //     },  
+        //     set(v) {
+        //         let dv = Number(v.replace(/[^\d;]/g, ''))
+        //         if ( dv > this.$root.price.range[0] ) this.$root.price.value[0] = dv
+        //         console.log('from set: v, dv, this.$root.price.value[0]', v, dv, this.$root.price.value[0])
+        //         console.log('set minVal', this.minVal)
+        //     }
+        // },
+        
+        // maxVal: {
+        //     get() {
+        //         return String(this.$root.price.value[1]).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        //     },  
+        //     set(v) {
+        //         let dv = Number(v.replace(/[^\d;]/g, ''))
+        //         if ( dv > this.$root.price.range[0] ) this.$root.price.value[1] = dv
+        //     }
+        // }
     },
     watch: {
         brandValue: function(newValue) {
@@ -304,6 +324,9 @@ export default {
         },
 
         rangeEnd() {
+
+            this.viewInputRange.min = false
+            this.viewInputRange.max = false
             
             this.activeButton = false
 
@@ -319,6 +342,7 @@ export default {
                 this.buttonLink = this.buildLink()
                 this.activeButton = true
             })
+            this.minVal
         },
         buildRange(rangeSource = 'brandOptions') {
             if ( this[rangeSource].length > 0 ) {
@@ -353,14 +377,14 @@ fieldset[disabled] .multiselect {
   pointer-events: none;
 }
 
-.input-range input {
+.input-range input,  .input-range .view-range {
     border: none;
     width: 100%;
     padding-top: 7px;
     outline: none;
 }
-.input-range:first-child input {
-    margin-left: 10px;
+.input-range:first-child input, .input-range:first-child .view-range {
+    padding-left: 2px;
     text-align: left;
     position: relative;
 }
@@ -374,6 +398,10 @@ fieldset[disabled] .multiselect {
     background: var(--yagray);
 }
 .input-range:last-child input {
+    margin-right: 10px;
+    text-align: right;
+}
+.input-range:last-child input, .input-range:last-child .view-range {
     margin-right: 10px;
     text-align: right;
 }

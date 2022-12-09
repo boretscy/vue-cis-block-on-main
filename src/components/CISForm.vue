@@ -134,24 +134,18 @@ export default {
     },
     data: function() {
         return {
-
             totalCount: 0,
             buttonLink: '/',
-
             brandValue: [
             ],
-
             modelValue: [
             ],
-
             viewInputRange: {
                 min: false,
                 max: false,
             },
-
             minRange: 0,
             maxRange: 99999999,
-
             activeButton: true,
             defaultButtonText: 'Ожидайте'
         }

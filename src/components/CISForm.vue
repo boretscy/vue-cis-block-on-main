@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :key="iterator">
         <div class="row">
             <div class="col">
                 <form class="bg-yayellow b-radius-small p-3 p-md-5 m-0">
@@ -66,8 +66,7 @@
                                 v-if="brandOptions">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start position-relative input-range">
-                                        <input type="hidden" v-model="$root.price.value[0]">
-                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd" :key="iterMin">
                                         <span class="name">Цена от</span>
                                         <span class="rubble">₽</span>
                                     </div>
@@ -83,6 +82,7 @@
                                         :min="$root.price.range[0]"
                                         :max="$root.price.range[1]"
                                         :interval="1"
+                                        :silent="true"
                                         tooltip="none"
                                         @drag-end="rangeEnd"
                                         ></vue-slider>
@@ -128,12 +128,16 @@ export default {
 
             brandValue: [
             ],
-
             modelValue: [
             ],
 
             activeButton: true,
-            defaultButtonText: 'Ожидайте'
+            defaultButtonText: 'Ожидайте',
+
+            iterMin: 0,
+            iterMax: 0,
+
+            iterator: 0
         }
     },
     computed: {
@@ -147,7 +151,7 @@ export default {
             },  
             set(v) {
                 let dv = Number(v.replace(/[^\d;]/g, ''))
-                if ( dv > this.$root.price.range[0] ) this.$set(this.$root.price.value, 0, dv)
+                this.$set(this.$root.price.value, 0, dv)
             }
         },
         maxVal: {
@@ -301,8 +305,10 @@ export default {
         },
 
         rangeEnd() {
-            
-            this.activeButton = false
+
+            // this.activeButton = false
+            if ( Number(this.minVal.replace(/[^\d;]/g, '')) < this.$root.price.range[0] ) this.$set(this.$root.price.value, 0, this.$root.price.range[0])
+            if ( Number(this.maxVal.replace(/[^\d;]/g, '')) > this.$root.price.range[1] ) this.$set(this.$root.price.value, 1, this.$root.price.range[1])
 
             let url = this.$root.apiUrl + 'filter' + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
             let get = this.builGetParams()
@@ -313,8 +319,7 @@ export default {
             this.axios.get(url).then((response) => {
                 this.totalCount = response.data.totalCount
             }).then( () => {
-                this.buttonLink = this.buildLink()
-                this.activeButton = true
+                // this.buttonLink = this.buildLink()
             })
             this.minVal
         },

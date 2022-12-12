@@ -322,7 +322,7 @@ export default {
         },
         rangeInput: _.debounce(function() {
             this.rangeEnd();
-        }, 500),
+        }, 1000),
         buildRange(rangeSource = 'brandOptions') {
             if ( this[rangeSource].length > 0 ) {
 

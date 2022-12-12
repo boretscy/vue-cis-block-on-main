@@ -160,7 +160,7 @@ export default {
             },  
             set(v) {
                 let dv = Number(v.replace(/[^\d;]/g, ''))
-                if ( dv > this.$root.price.range[0] ) this.$set(this.$root.price.value, 1, dv)
+                if ( dv > this.$root.price.value[0] ) this.$set(this.$root.price.value, 1, dv)
             }
         }
     },

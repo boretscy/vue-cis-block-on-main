@@ -15,7 +15,7 @@
             <a 
                 v-for="item in bodies"
                 :key="item.ID"
-                :href="'/cars/new/?body='+item.code" 
+                :href="link+'&body='+item.code" 
                 class="col-6 col-md-4 col-lg mb-3 mb-lg-0 cis-filter-on-main-bodies-item text-center text-decoration-none c-yadarkgray c-h-yablack"
                 >
                 <div class="cis-filter-on-main-bodies-item-icon">
@@ -101,7 +101,13 @@ export default {
         IconWagon, IconWagonback
     },
     computed: {
-        bodies() {return this.$root.bodies}
+        bodies() {return this.$root.bodies},
+        link() {
+            let get = []
+            for ( let i in this.$root.settings.items[this.$root.itemIndx].params ) get.push(i+'='+this.$root.settings.items[this.$root.itemIndx].params[i])
+            if ( this.$root.city ) get.push('city='+this.$root.city)
+            return this.$root.settings.baseURL + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/' + '?' + get.join('&');
+        }
     }
 
 }

@@ -1,5 +1,5 @@
 <template>
-    <div :key="iterator">
+    <div>
         <div class="row">
             <div class="col">
                 <form class="bg-yayellow b-radius-small p-3 p-md-5 m-0">
@@ -66,12 +66,12 @@
                                 v-if="brandOptions">
                                 <div class="row px-3 pt-2 mb-2 align-items-center" style="height: 35px">
                                     <div class="col-6 text-start position-relative input-range">
-                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd" :key="iterMin">
+                                        <input type="text" v-model="minVal" @blur="rangeEnd" @keyup.enter="rangeEnd" @input="rangeInput">
                                         <span class="name">Цена от</span>
                                         <span class="rubble">₽</span>
                                     </div>
                                     <div class="col-6 text-end position-relative input-range">
-                                        <input type="text" v-model="maxVal" @blur="rangeEnd" @keyup.enter="rangeEnd">
+                                        <input type="text" v-model="maxVal" @blur="rangeEnd" @keyup.enter="rangeEnd" @input="rangeInput">
                                         <span class="name">до</span>
                                         <span class="rubble">₽</span>
                                     </div>
@@ -114,6 +114,8 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import Multiselect from 'vue-multiselect'
 
+import _ from 'lodash'
+
 export default {
     name: 'CISForm',
     components: {
@@ -132,12 +134,7 @@ export default {
             ],
 
             activeButton: true,
-            defaultButtonText: 'Ожидайте',
-
-            iterMin: 0,
-            iterMax: 0,
-
-            iterator: 0
+            defaultButtonText: 'Ожидайте'
         }
     },
     computed: {
@@ -323,6 +320,9 @@ export default {
             })
             this.minVal
         },
+        rangeInput: _.debounce(function() {
+            this.rangeEnd();
+        }, 500),
         buildRange(rangeSource = 'brandOptions') {
             if ( this[rangeSource].length > 0 ) {
 

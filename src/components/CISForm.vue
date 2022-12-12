@@ -319,7 +319,7 @@ export default {
             this.axios.get(url).then((response) => {
                 this.totalCount = response.data.totalCount
             }).then( () => {
-                // this.buttonLink = this.buildLink()
+                this.buttonLink = this.buildLink()
             })
             this.minVal
         },

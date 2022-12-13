@@ -24,7 +24,7 @@
                 :key="n"
                 >
                 <a 
-                    :href="'/cars/'+link+'/'+((link=='new')?brands[n-1].code:'?brand='+brands[n-1].code)" 
+                    :href="buildLink(brands[n-1].code)" 
                     class="text-decoration-none c-yadarkgray c-h-yablack d-block b-radius-small py-1 ps-3 d-flex align-items-center justify-content-between"
                     >
                     {{ brands[n-1].name }}
@@ -40,11 +40,18 @@
 export default {
     name: 'CISBrands',
     computed: {
-        link() {return this.$root.link},
         brands() {return this.$root.brands},
         brandsCount() {
             let res = 18
             if ( this.$root.brands.length < res ) res = this.$root.brands.length
+            return res
+        }
+    },
+    methods: {
+        buildLink( brand = null ) {
+            let res = this.$root.settings.baseURL + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
+            if ( brand ) res += brand
+            if ( this.$root.city ) res += '?city=' + this.$root.city
             return res
         }
     }

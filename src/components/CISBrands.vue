@@ -51,7 +51,16 @@ export default {
         buildLink( brand = null ) {
             let res = this.$root.settings.baseURL + '/' + this.$root.settings.items[this.$root.itemIndx].code + '/'
             if ( brand ) res += brand
-            if ( this.$root.city ) res += '?city=' + this.$root.city
+            let get = []
+            if ( this.$root.settings.items[this.$root.itemIndx].params ) {
+                for ( let i in this.$root.settings.items[this.$root.itemIndx].params ) {
+                    get.push(i+'='+this.$root.settings.items[this.$root.itemIndx].params[i])
+                }
+            }
+            if ( this.$root.city ) get.push('city='+this.$root.city)
+            if ( get.length ) {
+                res += '?'+get.join('&')
+            }
             return res
         }
     }
